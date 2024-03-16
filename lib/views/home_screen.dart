@@ -1,9 +1,8 @@
-import 'package:air_corporation/common/variables.dart';
+import 'package:air_corporation/controller/orders_controller.dart';
 import 'package:air_corporation/widget/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-
 import '../widget/custom_drawer.dart';
 import '../widget/my_text_style.dart';
 
@@ -17,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GetStorage userData = GetStorage();
+  OrderController orderController = Get.put(OrderController());
 
   List itemList = [
     {
@@ -29,6 +29,11 @@ class _HomeScreenState extends State<HomeScreen> {
       "icon": Icons.report,
       "page": "/attendanceScreen",
     },
+    {
+      "title": "OrdersList",
+      "icon": Icons.shopping_bag,
+      "page": "/OrderList",
+    },
   ];
   @override
   Widget build(BuildContext context) {
@@ -37,6 +42,18 @@ class _HomeScreenState extends State<HomeScreen> {
       key: _scaffoldKey,
       appBar: CustomAppBar(
         title: Text('Home Screen'),
+        actions: [
+          IconButton(
+              onPressed: () {
+
+                orderController.order("/admin/orders");
+
+
+
+
+              },
+              icon: Icon(Icons.add))
+        ],
         leading: IconButton(
           onPressed: () {
             _scaffoldKey.currentState!.openDrawer();
@@ -80,7 +97,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     itemBuilder: (context, index) {
                       return GestureDetector(
-                        onTap: (() {
+                        onTap: (() async{
+
+                          if(itemList[index]['title']== "OrdersList" ){
+                            await orderController.order("/admin/orders");
+                          }
+
+
                           final List<Map<String, dynamic>> selectedExpenseData =
                               [];
                           Get.toNamed(
