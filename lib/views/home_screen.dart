@@ -27,9 +27,9 @@ class _HomeScreenState extends State<HomeScreen> {
       "page": "/OrderSubmitScreen",
     },
     {
-      "title": "Order Report",
+      "title": "OrderReport",
       "icon": Icons.report,
-      "page": "/attendanceScreen",
+      "page": "/OrderReport",
     },
     {
       "title": "OrdersList",

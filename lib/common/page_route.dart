@@ -11,6 +11,7 @@ import '../views/change_password_screen.dart';
 import '../views/login_screen.dart';
 
 import '../views/order_list.dart';
+import '../views/order_report.dart';
 import '../views/order_statuses.dart';
 import '../views/profile_screen.dart';
 
@@ -24,5 +25,6 @@ var getPages = [
   GetPage(name: "/OrderSubmitScreen", page: () => OrderSubmitScreen()),
   GetPage(name: "/OrderList", page: () => OrderList()),
   GetPage(name: "/OrderStatus", page: () => OrderStatus()),
+  GetPage(name: "/OrderReport", page: () => OrderReport()),
 
 ];
