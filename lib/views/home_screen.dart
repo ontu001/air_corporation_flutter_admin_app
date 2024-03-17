@@ -42,18 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
       key: _scaffoldKey,
       appBar: CustomAppBar(
         title: Text('Home Screen'),
-        actions: [
-          IconButton(
-              onPressed: () {
-
-                orderController.order("/admin/orders");
-
-
-
-
-              },
-              icon: Icon(Icons.add))
-        ],
+        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.add))],
         leading: IconButton(
           onPressed: () {
             _scaffoldKey.currentState!.openDrawer();
@@ -97,12 +86,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     itemBuilder: (context, index) {
                       return GestureDetector(
-                        onTap: (() async{
-
-                          if(itemList[index]['title']== "OrdersList" ){
-                            await orderController.order("/admin/orders");
+                        onTap: (() async {
+                          if (itemList[index]['title'] == "OrdersList") {
+                            await orderController.fetchOrders();
                           }
-
 
                           final List<Map<String, dynamic>> selectedExpenseData =
                               [];

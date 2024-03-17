@@ -13,35 +13,30 @@ class OrderList extends StatefulWidget {
 class _OrderListState extends State<OrderList> {
   OrderController orderController = Get.put(OrderController());
   @override
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetBuilder<OrderController>(
-        builder: (context) {
-          return Center(
-            child:
-
-            Obx(() {
-              return  Column(
-                children: [
-                  Text(
-                  context.orderList[0]['customer_name'],
-                  ),
-                  Text(
-                    context.orderList[0]['district'],
-                  ),
-                  Text(
-                    context.orderList[0]['order_note'],
-                  ),
-
-                ],
-              );
-            })
-           ,
-          );
-        }
-      ),
+      body: GetBuilder<OrderController>(builder: (context) {
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                context.orderList.result!.data![0].customerName.toString(),
+              ),
+              Text(
+                context.orderList.result!.data![0].paidStatus.toString(),
+              ),
+              Text(
+                context.orderList.result!.data![1].customerName.toString(),
+              ),
+              Text(
+                context.orderList.result!.data![1].paidStatus.toString(),
+              ),
+            ],
+          ),
+        );
+      }),
     );
   }
 }
