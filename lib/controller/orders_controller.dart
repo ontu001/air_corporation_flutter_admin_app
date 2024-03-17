@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import '../services/api_service.dart';
 
 class OrderController extends GetxController {
-  
   OrdersModel orderList = OrdersModel();
   var isLoading = false.obs;
   var token = userData.read("token");

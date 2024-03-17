@@ -20,23 +20,18 @@ class _OrderListState extends State<OrderList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-
-
       body: SafeArea(
         child: Column(
-
           children: [
             CustomBottomForOrderScreen(),
             BoyListFOrOrderScreen(),
-
-
           ],
         ),
       ),
 
-
-      // body: GetBuilder<OrderController>(builder: (context) {
+    
+      
+      //  GetBuilder<OrderController>(builder: (context) {
       //   return Center(
       //     child: Column(
       //       mainAxisAlignment: MainAxisAlignment.center,
@@ -57,8 +52,8 @@ class _OrderListState extends State<OrderList> {
       //     ),
       //   );
       // }),
-
+   
+   
     );
   }
 }
-
