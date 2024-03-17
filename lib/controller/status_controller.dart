@@ -1,23 +1,23 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:air_corporation/model/orders_model.dart';
+import 'package:air_corporation/model/status_model.dart';
 import 'package:get/get.dart';
 import '../services/api_service.dart';
 
-class OrderController extends GetxController {
-  OrdersModel orderList = OrdersModel();
+class StatusController extends GetxController {
+  StatusModel status = StatusModel();
 
   var isLoading = false.obs;
 
-  Future<void> fetchOrders() async {
+  Future<void> fetchStatus() async {
     // var token = data['api_token'];
 
     var token = "65|nXalcR53N9X6inPEG0OSsk1MA9IOnwpnsKTiTgyq1f50c3e5";
     try {
       isLoading.value = true;
       final res = await ApiServices.get(
-        "/admin/orders",
+        "/admin/statuses",
         {
           "Authorization": "Bearer $token",
           "Content-Type": "application/json",
@@ -36,9 +36,10 @@ class OrderController extends GetxController {
          
           Map<String, dynamic> jsonData = jsonDecode(res.body);
 
-          orderList = OrdersModel.fromJson(jsonData);
+          status = StatusModel.fromJson(jsonData);
 
-         print("message: >>>>>>> ${orderList.result?.data?[0].customerName}");
+         print("status: >>>>>>> ${status.result?.data?[0].bgColor}");
+         print("status 2: >>>>>>> ${status.result?.data?[0].textColor}");
         } else {
           isLoading.value = false;
         }
@@ -48,4 +49,10 @@ class OrderController extends GetxController {
       print(e);
     }
   }
+
+
+  
+
+
+
 }
