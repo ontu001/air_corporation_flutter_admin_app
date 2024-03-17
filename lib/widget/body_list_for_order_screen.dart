@@ -36,7 +36,7 @@ class BoyListFOrOrderScreen extends StatelessWidget{
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
 
-                            Text("Order id : ",style: kTextStyle,),
+                            Text("Order id :  ",style: kTextStyle,),
                             Text("Status : ",style: kTextStyle,),
                             Text("Phone : ",style: kTextStyle,),
                             Text("Date : ",style: kTextStyle,),
@@ -46,7 +46,7 @@ class BoyListFOrOrderScreen extends StatelessWidget{
                         ),
 
 
-                        SizedBox(width: 160,),
+                        SizedBox(width: 100,),
 
                         //group 2
                         Column(

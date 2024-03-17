@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 String dbaseUrl = "https://arcorporationapi.ewant.com.bd/api";
@@ -22,11 +23,15 @@ class ApiServices {
     );
 
     if (response.statusCode == 200) {
-      final responseBody = jsonDecode(response.body);
+      // final responseBody = jsonDecode(response.body);
+      return response;
 
-      final result = responseBody['result']['data'] as List;
-      return result;
-    } else
-      return null;
+      // final result = responseBody['result']['data'] as List;
+      // return result;
+    } else {
+      print(response.body);
+    }
+
+    return null;
   }
 }

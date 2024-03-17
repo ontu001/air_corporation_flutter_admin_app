@@ -1,3 +1,4 @@
+import 'package:air_corporation/controller/Status_controller.dart';
 import 'package:air_corporation/controller/orders_controller.dart';
 import 'package:air_corporation/widget/custom_appbar.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GetStorage userData = GetStorage();
   OrderController orderController = Get.put(OrderController());
+  StatusController statusController = Get.put(StatusController());
 
   List itemList = [
     {
@@ -34,6 +36,13 @@ class _HomeScreenState extends State<HomeScreen> {
       "icon": Icons.shopping_bag,
       "page": "/OrderList",
     },
+    {
+      "title": "StatusScreen",
+      "icon": Icons.check,
+      "page": "/StatusScreen",
+    },
+
+    
   ];
   @override
   Widget build(BuildContext context) {
@@ -42,18 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
       key: _scaffoldKey,
       appBar: CustomAppBar(
         title: Text('Home Screen'),
-        actions: [
-          IconButton(
-              onPressed: () {
-
-                orderController.order("/admin/orders");
-
-
-
-
-              },
-              icon: Icon(Icons.add))
-        ],
+        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.add))],
         leading: IconButton(
           onPressed: () {
             _scaffoldKey.currentState!.openDrawer();
@@ -89,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: itemList.length,
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
-                    padding: EdgeInsets.fromLTRB(12, 0, 12, 20),
+                    padding: const EdgeInsets.fromLTRB(12, 0, 12, 20),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
                       mainAxisSpacing: 5.0,
@@ -97,12 +95,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     itemBuilder: (context, index) {
                       return GestureDetector(
-                        onTap: (() async{
+                        onTap: (() async {
 
-                          if(itemList[index]['title']== "OrdersList" ){
-                            await orderController.order("/admin/orders");
+
+                          if (itemList[index]['title'] == "OrdersList") {
+                            await orderController.fetchOrders();
                           }
-
+                          if (itemList[index]['title'] == "StatusScreen") {
+                            await statusController.fetchStatus();
+                          }
 
                           final List<Map<String, dynamic>> selectedExpenseData =
                               [];

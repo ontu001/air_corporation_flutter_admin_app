@@ -22,6 +22,7 @@ class _OrderListState extends State<OrderList> {
     return Scaffold(
 
 
+
       body: SafeArea(
         child: Column(
 
@@ -34,6 +35,28 @@ class _OrderListState extends State<OrderList> {
         ),
       ),
 
+
+      // body: GetBuilder<OrderController>(builder: (context) {
+      //   return Center(
+      //     child: Column(
+      //       mainAxisAlignment: MainAxisAlignment.center,
+      //       children: [
+      //         Text(
+      //           context.orderList.result!.data![0].customerName.toString(),
+      //         ),
+      //         Text(
+      //           context.orderList.result!.data![0].paidStatus.toString(),
+      //         ),
+      //         Text(
+      //           context.orderList.result!.data![1].customerName.toString(),
+      //         ),
+      //         Text(
+      //           context.orderList.result!.data![1].paidStatus.toString(),
+      //         ),
+      //       ],
+      //     ),
+      //   );
+      // }),
 
     );
   }
