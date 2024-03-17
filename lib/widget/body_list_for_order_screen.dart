@@ -6,8 +6,12 @@ import 'package:get/get.dart';
 import '../common/constant.dart';
 
 class BoyListFOrOrderScreen extends StatelessWidget {
+  OrderController orderController = OrderController();
+
   @override
   Widget build(BuildContext context) {
+    // String text = "2024-02-28T23:55:33.000000Z";
+
     return GetBuilder<OrderController>(builder: (controller) {
       return Expanded(
         child: Padding(
@@ -49,7 +53,7 @@ class BoyListFOrOrderScreen extends StatelessWidget {
                                 style: kTextStyle,
                               ),
                               Text(
-                                "Date : ${controller.orderList.result?.data![index].createdAt.toString()}",
+                                "Date : ${controller.orderList.result?.data![index].createdAt.toString().substring(0, controller.orderList.result?.data![index].createdAt.toString().indexOf('T'))}",
                                 style: kTextStyle,
                               ),
                             ],
@@ -118,8 +122,6 @@ class BoyListFOrOrderScreen extends StatelessWidget {
           ),
         ),
       );
-
-     
     });
   }
 }
