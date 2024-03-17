@@ -7,13 +7,10 @@ import '../services/api_service.dart';
 
 class OrderController extends GetxController {
   OrdersModel orderList = OrdersModel();
-
   var isLoading = false.obs;
+  var token = userData.read("token");
 
   Future<void> fetchOrders() async {
-    // var token = data['api_token'];
-
-    var token = "65|nXalcR53N9X6inPEG0OSsk1MA9IOnwpnsKTiTgyq1f50c3e5";
     try {
       isLoading.value = true;
       final res = await ApiServices.get(
@@ -33,12 +30,11 @@ class OrderController extends GetxController {
 
           print("aita e 2222 >>>>>>> ${res.body}");
 
-         
           Map<String, dynamic> jsonData = jsonDecode(res.body);
 
           orderList = OrdersModel.fromJson(jsonData);
 
-         print("message: >>>>>>> ${orderList.result?.data?[0].customerName}");
+          print("message: >>>>>>> ${orderList.result?.data?[0].customerName}");
         } else {
           isLoading.value = false;
         }

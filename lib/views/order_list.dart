@@ -1,3 +1,4 @@
+import 'package:air_corporation/common/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/orders_controller.dart';
@@ -18,6 +19,14 @@ class _OrderListState extends State<OrderList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(onPressed: ()=>Navigator.pop(context),icon: Icon(Icons.arrow_back,color: kPrimaryColor,),),
+        title: Text("Orders",style: TextStyle(color: kPrimaryColor,fontWeight: FontWeight.w900),),
+        centerTitle: true,
+        actions: [
+          IconButton(onPressed: (){},icon: Icon(Icons.add,color: kPrimaryColor,),),
+        ],
+      ),
       body: SafeArea(
         child: Column(
           children: [
@@ -26,27 +35,6 @@ class _OrderListState extends State<OrderList> {
           ],
         ),
       ),
-      // body: GetBuilder<OrderController>(builder: (context) {
-      //   return Center(
-      //     child: Column(
-      //       mainAxisAlignment: MainAxisAlignment.center,
-      //       children: [
-      //         Text(
-      //           context.orderList.result!.data![0].customerName.toString(),
-      //         ),
-      //         Text(
-      //           context.orderList.result!.data![0].paidStatus.toString(),
-      //         ),
-      //         Text(
-      //           context.orderList.result!.data![1].customerName.toString(),
-      //         ),
-      //         Text(
-      //           context.orderList.result!.data![1].paidStatus.toString(),
-      //         ),
-      //       ],
-      //     ),
-      //   );
-      // }),
     );
   }
 }

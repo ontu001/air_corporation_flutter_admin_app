@@ -18,10 +18,8 @@ class CustomBottomForOrderScreen extends StatelessWidget{
         children: [
 
 
-          CustomButton(onTap: (){}, title: 'Back',),
-          SizedBox(width: 7,),
-          CustomButton(onTap: (){}, title: 'Add +',),
-          SizedBox(width: 7,),
+
+
           CustomButton(onTap: (){}, title: 'all',),
           SizedBox(width: 7,),
           CustomButton(onTap: (){}, title: 'on way',),
