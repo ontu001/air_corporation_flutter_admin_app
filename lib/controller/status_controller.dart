@@ -23,21 +23,21 @@ class StatusController extends GetxController {
         },
       );
 
-      print("aita e >>>>>>> ${res.body}");
-      print(">>>>>>> ${token}");
+      // print("aita e >>>>>>> ${res.body}");
+      // print(">>>>>>> ${token}");
 
       if (res.body != null) {
         if (res.statusCode == 200) {
           isLoading.value = false;
 
-          print("aita e 2222 >>>>>>> ${res.body}");
+         // print("aita e 2222 >>>>>>> ${res.body}");
 
           Map<String, dynamic> jsonData = jsonDecode(res.body);
 
           status = StatusModel.fromJson(jsonData);
 
-          print("status: >>>>>>> ${status.result?.data?[0].bgColor}");
-          print("status 2: >>>>>>> ${status.result?.data?[0].textColor}");
+          // print("status: >>>>>>> ${status.result?.data?[0].bgColor}");
+          // print("status 2: >>>>>>> ${status.result?.data?[0].textColor}");
         } else {
           isLoading.value = false;
         }

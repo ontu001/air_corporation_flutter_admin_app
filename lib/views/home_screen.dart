@@ -37,9 +37,9 @@ class _HomeScreenState extends State<HomeScreen> {
       "page": "/OrderList",
     },
     {
-      "title": "StatusScreen",
+      "title": "OrderStatus",
       "icon": Icons.check,
-      "page": "/StatusScreen",
+      "page": "/OrderStatus",
     },
 
     
@@ -101,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           if (itemList[index]['title'] == "OrdersList") {
                             await orderController.fetchOrders();
                           }
-                          if (itemList[index]['title'] == "StatusScreen") {
+                          if (itemList[index]['title'] == "OrderStatus") {
                             await statusController.fetchStatus();
                           }
 

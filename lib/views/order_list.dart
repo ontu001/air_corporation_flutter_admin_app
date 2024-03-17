@@ -6,16 +6,8 @@ import '../widget/body_list_for_order_screen.dart';
 import '../widget/custom_bottom_bar_for_order_screen.dart';
 
 
-class OrderList extends StatefulWidget {
-  const OrderList({super.key});
-
-  @override
-  State<OrderList> createState() => _OrderListState();
-}
-
-class _OrderListState extends State<OrderList> {
+class OrderList extends StatelessWidget {
   OrderController orderController = Get.put(OrderController());
-  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,13 +19,11 @@ class _OrderListState extends State<OrderList> {
           IconButton(onPressed: (){},icon: Icon(Icons.add,color: kPrimaryColor,),),
         ],
       ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            CustomBottomForOrderScreen(),
-            BoyListFOrOrderScreen(),
-          ],
-        ),
+      body: Column(
+        children: [
+          CustomBottomForOrderScreen(),
+          BoyListFOrOrderScreen(),
+        ],
       ),
     );
   }
