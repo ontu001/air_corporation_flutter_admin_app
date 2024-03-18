@@ -21,11 +21,11 @@ class StatusController extends GetxController {
 };
 
 
-  Future<void> feupdateStatus() async {
+  Future<void> feupdateStatus(int id) async {
     try {
       isLoading.value = true;
       final res = await ApiServices.update(
-        "/admin/statuses/1",
+        "/admin/statuses/$id",
         body,
         {
           "Authorization": "Bearer $token",

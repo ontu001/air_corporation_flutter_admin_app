@@ -70,8 +70,8 @@ class OrderStatus extends StatelessWidget {
                       Center(
                         child: ElevatedButton(
                           onPressed: () {
-                            print("updateStatus");
-                            statusController.feupdateStatus();
+                           // print("updateStatus");
+                            statusController.feupdateStatus(1);
                           },
                           child: Text("Edit"),
                         ),

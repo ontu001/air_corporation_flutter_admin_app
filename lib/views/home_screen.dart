@@ -41,8 +41,11 @@ class _HomeScreenState extends State<HomeScreen> {
       "icon": Icons.check,
       "page": "/OrderStatus",
     },
-
-    
+    {
+      "title": "orderUpdate",
+      "icon": Icons.edit,
+      "page": "/orderUpdate",
+    },
   ];
   @override
   Widget build(BuildContext context) {
@@ -96,13 +99,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: (() async {
-
-
                           if (itemList[index]['title'] == "OrdersList") {
                             await orderController.fetchOrders();
                           }
                           if (itemList[index]['title'] == "OrderStatus") {
                             await statusController.fetchStatus();
+                          }
+                          if (itemList[index]['title'] == "orderUpdate") {
+                            bool result = await orderController.orderUpdate(2);
+                            if (result == true) {
+                              Get.toNamed(
+                                '${itemList[index]["page"]}',
+                              );
+                            }
                           }
 
                           final List<Map<String, dynamic>> selectedExpenseData =
@@ -145,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       );
                     }),
-              )
+              ),
             ],
           ),
         ),
