@@ -15,7 +15,7 @@ import 'views/splash_screen.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  /// get app verison
+  /// get app verisonxc
   appVersion.value = '';
   PackageInfo packageInfo = await PackageInfo.fromPlatform();
   appVersion.value = packageInfo.version.toString();

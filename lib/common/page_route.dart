@@ -1,3 +1,4 @@
+import 'package:air_corporation/views/hold_on_screen.dart';
 import 'package:air_corporation/views/home_screen.dart';
 import 'package:air_corporation/views/order_submit_screen.dart';
 import 'package:air_corporation/views/route_page.dart';
@@ -26,5 +27,6 @@ var getPages = [
   GetPage(name: "/OrderList", page: () => OrderList()),
   GetPage(name: "/OrderStatus", page: () => OrderStatus()),
   GetPage(name: "/OrderReport", page: () => OrderReport()),
+  GetPage(name: "/holdOnScreen", page: () => HoldOnScreen()),
 
 ];

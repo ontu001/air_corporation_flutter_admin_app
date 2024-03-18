@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 
 import 'custom_button.dart';
 
@@ -27,7 +28,14 @@ class CustomBottomForOrderScreen extends StatelessWidget{
 
           CustomButton(onTap: (){}, title: 'submit',),
           SizedBox(width: 7,),
-          CustomButton(onTap: (){}, title: 'hold on',),
+          CustomButton(onTap: (){
+
+
+           Get.toNamed('/holdOnScreen',
+            // arguments: {'id': 123}
+            );
+
+          }, title: 'hold on',),
           SizedBox(width: 7,),
           CustomButton(onTap: (){}, title: 'Under Verified',),
           SizedBox(width: 7,),

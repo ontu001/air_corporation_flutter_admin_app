@@ -13,10 +13,10 @@ class OrderList extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(onPressed: ()=>Navigator.pop(context),icon: Icon(Icons.arrow_back,color: kPrimaryColor,),),
-        title: Text("Orders",style: TextStyle(color: kPrimaryColor,fontWeight: FontWeight.w900),),
+        title: const Text("Orders",style: TextStyle(color: kPrimaryColor,fontWeight: FontWeight.w900),),
         centerTitle: true,
         actions: [
-          IconButton(onPressed: (){},icon: Icon(Icons.add,color: kPrimaryColor,),),
+          IconButton(onPressed: (){},icon: const Icon(Icons.add,color: kPrimaryColor,),),
         ],
       ),
       body: Column(
