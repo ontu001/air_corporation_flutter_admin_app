@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../controller/orders_controller.dart';
 import '../widget/body_list_for_order_screen.dart';
 import '../widget/custom_bottom_bar_for_order_screen.dart';
+import 'add_new_order.dart';
 
 
 class OrderList extends StatelessWidget {
@@ -16,7 +17,7 @@ class OrderList extends StatelessWidget {
         title: const Text("Orders",style: TextStyle(color: kPrimaryColor,fontWeight: FontWeight.w900),),
         centerTitle: true,
         actions: [
-          IconButton(onPressed: (){},icon: const Icon(Icons.add,color: kPrimaryColor,),),
+          IconButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (_)=>AddNewOrder())),icon: const Icon(Icons.add,color: kPrimaryColor,),),
         ],
       ),
       body: Column(
