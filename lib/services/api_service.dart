@@ -10,11 +10,11 @@ var token = userData.read("token");
 
 class ApiServices {
   static Future<dynamic> get(
-    String url,
+    String endUrl,
     Map<String, String>? headers,
   ) async {
     final response = await http.get(
-      Uri.parse(dbaseUrl + url),
+      Uri.parse(dbaseUrl + endUrl),
       headers: headers ??
           {
             "Content-Type": "application/json",
@@ -32,19 +32,56 @@ class ApiServices {
   }
 
   static Future<dynamic> update(
-    String url,
+    String endUrl,
     Map body,
     Map<String, String>? headers,
   ) async {
-  
-    final response = await http.put(
-      Uri.parse(dbaseUrl + url),
+    final response = await http.put(Uri.parse(dbaseUrl + endUrl),
         body: jsonEncode(body),
         headers: headers ??
             {
               "Content-Type": "application/json",
               "Accept": "application/json",
             });
+    if (response.statusCode == 200) {
+      return response;
+    } else {
+      print(response.body);
+    }
+    return null;
+  }
+
+  static Future<dynamic> create(
+    String endUrl,
+    Map body,
+    Map<String, String>? headers,
+  ) async {
+    final response = await http.post(Uri.parse(dbaseUrl + endUrl),
+        body: jsonEncode(body),
+        headers: headers ??
+            {
+              "Content-Type": "application/json",
+              "Accept": "application/json",
+            });
+    if (response.statusCode == 200) {
+      return response;
+    } else {
+      print(response.body);
+    }
+    return null;
+  }
+
+  static Future<dynamic> delete(
+    String endUrl,
+    Map<String, String>? headers,
+  ) async {
+    final response = await http.delete(Uri.parse(dbaseUrl + endUrl),
+        headers: headers ??
+            {
+              "Content-Type": "application/json",
+              "Accept": "application/json",
+            });
+
     if (response.statusCode == 200) {
       return response;
     } else {
