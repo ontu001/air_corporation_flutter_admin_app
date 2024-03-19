@@ -15,17 +15,19 @@ class OrderStatus extends StatelessWidget {
     TextEditingController _bgColorController = TextEditingController();
     TextEditingController _textColorController = TextEditingController();
 
+
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: kPrimaryColor,
           ),
         ),
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "All Statuses List",
           style: TextStyle(fontWeight: FontWeight.w900, color: kPrimaryColor),
         ),
@@ -67,7 +69,7 @@ class OrderStatus extends StatelessWidget {
                         "Text Color : ${statusController.status.result?.data?[index].textColor.toString()}",
                         style: kTextStyle,
                       ),
-                      Text(
+                      const Text(
                         "Status : null",
                         style: kTextStyle,
                       ),
@@ -75,22 +77,32 @@ class OrderStatus extends StatelessWidget {
                         child: ElevatedButton(
                           onPressed: () {
                             // print("updateStatus");
-                            //statusController.feupdateStatus(1);
 
-                            showModalBottomSheet(context: context, builder: (context)=>bottomSheet(
-                               bottomSheetTitle: "Edit Order Statues",
-                              buttonText: "Submit",
-                              filed1: _nameController,
-                              filed2: _bgColorController,
-                              filed3: _textColorController,
-                               hint1: "Order Name",
-                              hint2: "Background Color",
-                                hint3: "Text Color",
-                              onPressed: (){},
-
-                            ));
-
-
+                            showModalBottomSheet(
+                                context: context,
+                                builder: (context) => bottomSheet(
+                                      bottomSheetTitle: "Edit Order Statues",
+                                      buttonText: "Submit",
+                                      filed1: _nameController,
+                                      filed2: _bgColorController,
+                                      filed3: _textColorController,
+                                      hint1: "Order Name",
+                                      hint2: "Background Color",
+                                      hint3: "Text Color",
+                                      onPressed: () async {
+                                        await statusController.feupdateStatus(
+                                            statusController.status.result
+                                                    ?.data?[index].id ??
+                                                1,
+                                            {
+                                              "name": _nameController.text,
+                                              "bg_color":
+                                                  _bgColorController.text,
+                                              "text_color":
+                                                  _textColorController.text,
+                                            });
+                                      },
+                                    ));
                           },
                           child: Text("Edit"),
                         ),

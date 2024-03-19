@@ -14,14 +14,10 @@ class StatusController extends GetxController {
   var isLoading = false.obs;
   var token = userData.read("token");
 
-  var  body={
-    "name": "Submitted update",
-    "bg_color": "#44190",
-    "text_color": "#fkfllk66"
-};
+ 
 
 
-  Future<void> feupdateStatus(int id) async {
+  Future<void> feupdateStatus( int id,var body) async {
     try {
       isLoading.value = true;
       final res = await ApiServices.update(
