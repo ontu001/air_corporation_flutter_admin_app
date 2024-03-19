@@ -132,4 +132,46 @@ class OrderController extends GetxController {
     }
     return false;
   }
+
+  Future<bool> orderDelete(int id) async {
+    try {
+      isLoading.value = true;
+      final res = await ApiServices.delete(
+        "/admin/orders/$id",
+        {
+          "Authorization": "Bearer $token",
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+      );
+
+      // print("aita e >>>>>>> ${res.body}");
+      // print(">>>>>>> ${token}");
+
+      if (res.body != null) {
+        if (res.statusCode == 200) {
+          isLoading.value = false;
+
+          print("aita e orderUpdatecheck >>>>>>> ${res.body}");
+
+          Map<String, dynamic> jsonData = jsonDecode(res.body);
+          
+          //Need update model:
+          orderUpdatecheck = OrderUpdateModel.fromJson(jsonData);
+
+          // print("status: >>>>>>> ${status.result?.data?[0].bgColor}");
+          // print("status 2: >>>>>>> ${status.result?.data?[0].textColor}");
+          return true;
+        } else {
+          isLoading.value = false;
+          return false;
+        }
+      }
+    } catch (e) {
+      isLoading.value = false;
+      print(e);
+      return false;
+    }
+    return false;
+  }
 }
