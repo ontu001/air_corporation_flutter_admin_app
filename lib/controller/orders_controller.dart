@@ -152,7 +152,7 @@ class OrderController extends GetxController {
         if (res.statusCode == 200) {
           isLoading.value = false;
 
-          print("aita e orderUpdatecheck >>>>>>> ${res.body}");
+          print("aita e delete er ta >>>>>>> ${res.body}");
 
           Map<String, dynamic> jsonData = jsonDecode(res.body);
           
