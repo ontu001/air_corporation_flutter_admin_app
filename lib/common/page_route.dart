@@ -14,7 +14,7 @@ import '../views/login_screen.dart';
 
 import '../views/order_list.dart';
 import '../views/order_report.dart';
-import '../views/order_statuses.dart';
+import '../views/all_statuses_list.dart';
 import '../views/profile_screen.dart';
 
 var getPages = [

@@ -5,11 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controller/Status_controller.dart';
+import '../widget/custom_bottom_sheet.dart';
 
 class OrderStatus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     StatusController statController = Get.put(StatusController());
+    TextEditingController _nameController = TextEditingController();
+    TextEditingController _bgColorController = TextEditingController();
+    TextEditingController _textColorController = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
@@ -70,8 +74,23 @@ class OrderStatus extends StatelessWidget {
                       Center(
                         child: ElevatedButton(
                           onPressed: () {
-                           // print("updateStatus");
-                            statusController.feupdateStatus(1);
+                            // print("updateStatus");
+                            //statusController.feupdateStatus(1);
+
+                            showModalBottomSheet(context: context, builder: (context)=>bottomSheet(
+                               bottomSheetTitle: "Edit Order Statues",
+                              buttonText: "Submit",
+                              filed1: _nameController,
+                              filed2: _bgColorController,
+                              filed3: _textColorController,
+                               hint1: "Order Name",
+                              hint2: "Background Color",
+                                hint3: "Text Color",
+                              onPressed: (){},
+
+                            ));
+
+
                           },
                           child: Text("Edit"),
                         ),

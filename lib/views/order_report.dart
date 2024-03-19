@@ -74,7 +74,7 @@ class _OrderReportState extends State<OrderReport> {
 
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                Column(
                  crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,7 +96,7 @@ class _OrderReportState extends State<OrderReport> {
 
                  ],
                ),
-                SizedBox(width: 10.0),
+
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
