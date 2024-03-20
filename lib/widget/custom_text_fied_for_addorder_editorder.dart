@@ -16,6 +16,7 @@ class CustomTextFiledforAddAndEditOrder extends StatelessWidget{
         Text(filedName),
         SizedBox(height: 5,),
         Container(
+          padding: EdgeInsets.all(10.0),
           margin: EdgeInsets.all(10.0),
           decoration: BoxDecoration(
             border: Border.all(),

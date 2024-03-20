@@ -29,7 +29,9 @@ class AddNewOrder extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            CustomTextFiledforAddAndEditOrder(),
+            CustomTextFiledforAddAndEditOrder(
+              hintText: "contact name",
+            ),
             SizedBox(
               height: 10,
             ),

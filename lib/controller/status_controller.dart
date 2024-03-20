@@ -17,7 +17,46 @@ class StatusController extends GetxController {
  
 
 
-  Future<void> feupdateStatus( int id,var body) async {
+  // Future<void> feupdateStatus( int id,var body) async {
+  //   try {
+  //     isLoading.value = true;
+  //     final res = await ApiServices.update(
+  //       "/admin/statuses/$id",
+  //       body,
+  //       {
+  //         "Authorization": "Bearer $token",
+  //         "Content-Type": "application/json",
+  //         "Accept": "application/json",
+  //
+  //       },
+  //     );
+  //
+  //     // print("aita e >>>>>>> ${res.body}");
+  //     // print(">>>>>>> ${token}");
+  //
+  //     if (res.body != null) {
+  //       if (res.statusCode == 200) {
+  //         isLoading.value = false;
+  //
+  //         print("aita e 2222 >>>>>>> ${res.body}");
+  //
+  //         Map<String, dynamic> jsonData = jsonDecode(res.body);
+  //
+  //         statusUpdate = StatusUpdateModel.fromJson(jsonData);
+  //
+  //         // print("status: >>>>>>> ${status.result?.data?[0].bgColor}");
+  //         // print("status 2: >>>>>>> ${status.result?.data?[0].textColor}");
+  //       } else {
+  //         isLoading.value = false;
+  //       }
+  //     }
+  //   } catch (e) {
+  //     isLoading.value = false;
+  //     print(e);
+  //   }
+  // }
+
+  Future<void> feupdateStatus(int id, var body) async {
     try {
       isLoading.value = true;
       final res = await ApiServices.update(
@@ -27,34 +66,35 @@ class StatusController extends GetxController {
           "Authorization": "Bearer $token",
           "Content-Type": "application/json",
           "Accept": "application/json",
-
         },
       );
-
-      // print("aita e >>>>>>> ${res.body}");
-      // print(">>>>>>> ${token}");
 
       if (res.body != null) {
         if (res.statusCode == 200) {
           isLoading.value = false;
 
-          print("aita e 2222 >>>>>>> ${res.body}");
-
           Map<String, dynamic> jsonData = jsonDecode(res.body);
 
           statusUpdate = StatusUpdateModel.fromJson(jsonData);
 
-          // print("status: >>>>>>> ${status.result?.data?[0].bgColor}");
-          // print("status 2: >>>>>>> ${status.result?.data?[0].textColor}");
+          // Update the status variable with the latest data
+          await fetchStatus();
+
+          // You might also want to add a message or notification to inform the user that the update was successful
+          // You can use Get.snackbar for example
+          Get.snackbar('Success', 'Status updated successfully');
         } else {
           isLoading.value = false;
+          // Handle error condition, if any
         }
       }
     } catch (e) {
       isLoading.value = false;
       print(e);
+      // Handle error condition, if any
     }
   }
+
 
 
 
