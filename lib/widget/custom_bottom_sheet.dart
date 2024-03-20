@@ -1,8 +1,9 @@
 import 'package:air_corporation/common/app_color.dart';
+import 'package:air_corporation/controller/status_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
+import 'package:get/get.dart';
 
 class bottomSheet extends StatelessWidget {
   final String bottomSheetTitle;
@@ -15,11 +16,20 @@ class bottomSheet extends StatelessWidget {
   final TextEditingController? filed3;
   final VoidCallback? onPressed;
 
-  const bottomSheet({this.bottomSheetTitle = "",  this.buttonText = "",  this.hint1 = " ",  this.hint2= "",  this.hint3= "",  this.filed1,  this.filed2,  this.filed3, this.onPressed});
+  bottomSheet(
+      {this.bottomSheetTitle = "",
+      this.buttonText = "",
+      this.hint1 = " ",
+      this.hint2 = "",
+      this.hint3 = "",
+      this.filed1,
+      this.filed2,
+      this.filed3,
+      this.onPressed});
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       height: 1000,
       width: double.maxFinite,
       decoration: BoxDecoration(
@@ -58,7 +68,6 @@ class bottomSheet extends StatelessWidget {
             decoration: InputDecoration(hintText: hint3),
             controller: filed3,
           ),
-
           SizedBox(
             height: 25.0,
           ),
