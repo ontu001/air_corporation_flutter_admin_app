@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../common/app_color.dart';
 import '../common/constant.dart';
+import '../views/edit_order.dart';
 
 class BoyListFOrOrderScreen extends StatelessWidget {
   OrderController orderController = OrderController();
@@ -116,7 +117,9 @@ class BoyListFOrOrderScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Checkbox(value: true, onChanged: (value) {}),
-                        IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+                        IconButton(onPressed: () {
+                          Get.to(EditOrder());
+                        }, icon: Icon(Icons.edit)),
                         IconButton(onPressed: () {}, icon: Icon(Icons.print)),
                         IconButton(
                             onPressed: () {}, icon: Icon(Icons.remove_red_eye)),
