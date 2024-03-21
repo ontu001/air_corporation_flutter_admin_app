@@ -15,10 +15,18 @@ class CustomTextFiledforAddAndEditOrder extends StatelessWidget{
       children: [
         Text(filedName),
         SizedBox(height: 5,),
-        TextField(
-          autofocus: true,
-          decoration: InputDecoration(hintText: hintText),
-          controller: controller,
+        Container(
+          padding: EdgeInsets.all(10.0),
+          margin: EdgeInsets.all(10.0),
+          decoration: BoxDecoration(
+            border: Border.all(),
+            borderRadius: BorderRadius.circular(10.0)
+          ),
+          child: TextField(
+            autofocus: false,
+            decoration: InputDecoration(hintText: hintText,border: InputBorder.none),
+            controller: controller,
+          ),
         )
       ],
     );

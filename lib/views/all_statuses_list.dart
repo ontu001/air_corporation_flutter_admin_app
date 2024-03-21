@@ -1,22 +1,27 @@
-import 'package:air_corporation/common/app_color.dart';
-import 'package:air_corporation/common/constant.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controller/Status_controller.dart';
 import '../widget/custom_bottom_sheet.dart';
+import '../common/app_color.dart';
+import '../common/constant.dart';
 
-class OrderStatus extends StatelessWidget {
+class OrderStatus extends StatefulWidget {
+  @override
+  State<OrderStatus> createState() => _OrderStatusState();
+}
+
+class _OrderStatusState extends State<OrderStatus> {
+  StatusController statusController = Get.put(StatusController());
+
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _bgColorController = TextEditingController();
+  TextEditingController _textColorController = TextEditingController();
+
+
+
   @override
   Widget build(BuildContext context) {
-    StatusController statController = Get.put(StatusController());
-    TextEditingController _nameController = TextEditingController();
-    TextEditingController _bgColorController = TextEditingController();
-    TextEditingController _textColorController = TextEditingController();
-
-
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -31,6 +36,7 @@ class OrderStatus extends StatelessWidget {
           "All Statuses List",
           style: TextStyle(fontWeight: FontWeight.w900, color: kPrimaryColor),
         ),
+
       ),
       body: GetBuilder<StatusController>(builder: (statusController) {
         return Padding(
@@ -76,33 +82,37 @@ class OrderStatus extends StatelessWidget {
                       Center(
                         child: ElevatedButton(
                           onPressed: () {
-                            // print("updateStatus");
-
                             showModalBottomSheet(
-                                context: context,
-                                builder: (context) => bottomSheet(
-                                      bottomSheetTitle: "Edit Order Statues",
-                                      buttonText: "Submit",
-                                      filed1: _nameController,
-                                      filed2: _bgColorController,
-                                      filed3: _textColorController,
-                                      hint1: "Order Name",
-                                      hint2: "Background Color",
-                                      hint3: "Text Color",
-                                      onPressed: () async {
-                                        await statusController.feupdateStatus(
-                                            statusController.status.result
-                                                    ?.data?[index].id ??
-                                                1,
-                                            {
-                                              "name": _nameController.text,
-                                              "bg_color":
-                                                  _bgColorController.text,
-                                              "text_color":
-                                                  _textColorController.text,
-                                            });
-                                      },
-                                    ));
+                              context: context,
+                              builder: (context) => bottomSheet(
+                                bottomSheetTitle: "Edit Order Statuses",
+                                buttonText: "Submit",
+                                filed1: _nameController,
+                                filed2: _bgColorController,
+                                filed3: _textColorController,
+                                hint1: "Order Name",
+                                hint2: "Background Color",
+                                hint3: "Text Color",
+                                onPressed: () async {
+                                  await statusController.feupdateStatus(
+                                    statusController.status.result?.data?[index].id ?? 1,
+                                    {
+                                      "name": _nameController.text,
+                                      "bg_color": _bgColorController.text,
+                                      "text_color": _textColorController.text,
+                                    },
+                                  );
+                                  _nameController.clear();
+                                  _bgColorController.clear();
+                                  _textColorController.clear();
+                                  Navigator.pop(context);
+                                  // Refresh data after updating
+                                  setState(() {
+                                    statusController.fetchStatus();
+                                  });
+                                },
+                              ),
+                            );
                           },
                           child: Text("Edit"),
                         ),

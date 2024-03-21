@@ -231,7 +231,7 @@ class OrderController extends GetxController {
         },
       );
 
-      // print("aita e >>>>>>> ${res.body}");
+      print("aita e delete : >>>>>>> ${res.body}");
       // print(">>>>>>> ${token}");
 
       if (res.body != null) {

@@ -47,6 +47,7 @@ class AddNewOrder extends StatelessWidget {
           scrollDirection: Axis.vertical,
           children: [
             Text("Order Information"),
+
             CustomTextFiledforAddAndEditOrder(
               controller: _1Controller,
             ),
@@ -61,6 +62,14 @@ class AddNewOrder extends StatelessWidget {
             ),
             CustomTextFiledforAddAndEditOrder(
               controller: _5Controller,
+            ),
+
+            SizedBox(
+              height: 10,
+            ),
+            CustomTextFiledforAddAndEditOrder(
+              hintText: "contact name",
+
             ),
             SizedBox(
               height: 10,
@@ -92,7 +101,13 @@ class AddNewOrder extends StatelessWidget {
               height: 10,
             ),
             Text("Regular Price : 0bdt"),
+            SizedBox(
+              height: 10,
+            ),
             Text("Discount : 0bdt"),
+              SizedBox(
+              height: 10,
+            ),
             Text("Offer Price : 0bdt"),
             CustomTextFiledforAddAndEditOrder(
               controller: _13Controller,

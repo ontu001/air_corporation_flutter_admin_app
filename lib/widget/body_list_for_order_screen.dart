@@ -5,14 +5,13 @@ import 'package:get/get.dart';
 
 import '../common/app_color.dart';
 import '../common/constant.dart';
+import '../views/edit_order.dart';
 
 class BoyListFOrOrderScreen extends StatelessWidget {
   OrderController orderController = OrderController();
 
   @override
   Widget build(BuildContext context) {
-    // String text = "2024-02-28T23:55:33.000000Z";
-
     return GetBuilder<OrderController>(builder: (controller) {
       return Expanded(
         child: Padding(
@@ -73,10 +72,6 @@ class BoyListFOrOrderScreen extends StatelessWidget {
                                 "Payable Amount : ${controller.orderList.result?.data![index].payablePrice.toString()}",
                                 style: kTextStyle,
                               ),
-
-
-
-
                             ],
                           ),
 
@@ -116,7 +111,11 @@ class BoyListFOrOrderScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Checkbox(value: true, onChanged: (value) {}),
-                        IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+                        IconButton(
+                            onPressed: () {
+                              Get.to(EditOrder());
+                            },
+                            icon: Icon(Icons.edit)),
                         IconButton(onPressed: () {}, icon: Icon(Icons.print)),
                         IconButton(
                             onPressed: () {}, icon: Icon(Icons.remove_red_eye)),
@@ -124,7 +123,44 @@ class BoyListFOrOrderScreen extends StatelessWidget {
                             onPressed: () {},
                             icon: Icon(Icons.delivery_dining)),
                         IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              print("dskdsf");
+
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: Text('Warning'),
+                                  content:
+                                      Text('Are you sure you want to delete?'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: Text('Cancel'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () async {
+                                        // Handle confirm action
+
+                                        var result =
+                                            await controller.orderDelete(4);
+                                        if (result == true) {
+                                          Get.snackbar("Deleted",
+                                              "Item deleted successfully");
+                                        } else {
+                                          Get.snackbar(
+                                              "Please increse order list",
+                                              "Please increse order list");
+                                        }
+                                        Navigator.pop(
+                                          context,
+                                        );
+                                      },
+                                      child: Text('Ok'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
                             icon: Icon(
                               Icons.delete_outline,
                               color: Colors.red,
