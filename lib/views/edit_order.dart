@@ -1,4 +1,6 @@
+import 'package:air_corporation/controller/orders_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../common/app_color.dart';
 import '../widget/custom_text_fied_for_addorder_editorder.dart';
@@ -6,6 +8,8 @@ import '../widget/custom_text_fied_for_addorder_editorder.dart';
 class EditOrder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+      final orderController =
+        Get.find<OrderController>(); // Access the controller
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -118,9 +122,26 @@ class EditOrder extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            ElevatedButton(onPressed: () {
-              Navigator.pop(context);
-            }, child: Text("ADD ORDER")),
+         Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.orange),
+                  onPressed: () async {
+                    //print("object");
+                    bool result = await orderController.orderUpdate(2);
+                    if (result == true) {
+                      Get.snackbar("Order Updated", "Order Updated Successfully");
+                    } else {
+                      Get.snackbar("Failed", "Something went worng!",
+                          colorText: Colors.red);
+                    }
+                  },
+                  child: Text(
+                    "Edit ORDER",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  )),
+            ),
           ],
         ),
       ),

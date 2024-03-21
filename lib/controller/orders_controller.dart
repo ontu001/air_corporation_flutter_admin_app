@@ -50,7 +50,7 @@ class OrderController extends GetxController {
 
   var orderUpdatebody = {
     "customer_name": "Test costomer",
-    "phone_number": "01686381000",
+    "phone_number": "01686381077",
     "address_details": "Address details",
     "district": "Dhaka",
     "order_note": "Any order note",
