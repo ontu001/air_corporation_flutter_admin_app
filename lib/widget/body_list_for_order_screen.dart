@@ -7,7 +7,12 @@ import '../common/app_color.dart';
 import '../common/constant.dart';
 import '../views/edit_order.dart';
 
-class BoyListFOrOrderScreen extends StatelessWidget {
+class BoyListFOrOrderScreen extends StatefulWidget {
+  @override
+  State<BoyListFOrOrderScreen> createState() => _BoyListFOrOrderScreenState();
+}
+
+class _BoyListFOrOrderScreenState extends State<BoyListFOrOrderScreen> {
   OrderController orderController = OrderController();
 
   @override
@@ -112,8 +117,8 @@ class BoyListFOrOrderScreen extends StatelessWidget {
                       children: [
                         Checkbox(value: true, onChanged: (value) {}),
                         IconButton(
-                            onPressed: () {
-                              Get.to(EditOrder());
+                            onPressed: () async{
+                            await  Get.to(EditOrder( id:  orderController.orderList.result?.data?[index].id ?? 0));
                             },
                             icon: Icon(Icons.edit)),
                         IconButton(onPressed: () {}, icon: Icon(Icons.print)),
@@ -124,7 +129,7 @@ class BoyListFOrOrderScreen extends StatelessWidget {
                             icon: Icon(Icons.delivery_dining)),
                         IconButton(
                             onPressed: () {
-                              print("dskdsf");
+
 
                               showDialog(
                                 context: context,
@@ -142,10 +147,14 @@ class BoyListFOrOrderScreen extends StatelessWidget {
                                         // Handle confirm action
 
                                         var result =
-                                            await controller.orderDelete(4);
+                                            await controller.orderDelete(controller.orderList.result?.data?[index].id ?? 0);
                                         if (result == true) {
                                           Get.snackbar("Deleted",
                                               "Item deleted successfully");
+                                          setState(() {
+                                            controller.fetchOrders();
+                                          });
+
                                         } else {
                                           Get.snackbar(
                                               "Please increse order list",

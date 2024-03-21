@@ -4,6 +4,9 @@ import '../common/app_color.dart';
 import '../common/variables.dart';
 import '../services/auth_services.dart';
 
+import '../views/all_statuses_list.dart';
+import '../views/order_list.dart';
+import '../views/order_report.dart';
 import 'my_text_style.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -41,6 +44,23 @@ class CustomDrawer extends StatelessWidget {
                     onTap: () => Get.offAllNamed("/route"),
                     title: "Home",
                     icon: Icons.home_outlined,
+                  ),
+                  menulist(
+                    onTap: () => Get.to(OrderList()),
+                    title: "Orders",
+                    icon: Icons.shop,
+                  ),
+
+                  menulist(
+                    onTap: () => Get.to(OrderStatus()),
+                    title: "OrderStatus",
+                    icon: Icons.info,
+                  ),
+
+                  menulist(
+                    onTap: () =>Get.to(OrderReport()),
+                    title: "OrderReport",
+                    icon: Icons.report,
                   ),
                
                   menulist(
