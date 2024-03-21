@@ -102,6 +102,9 @@ class _OrderStatusState extends State<OrderStatus> {
                                       "text_color": _textColorController.text,
                                     },
                                   );
+                                  _nameController.clear();
+                                  _bgColorController.clear();
+                                  _textColorController.clear();
                                   Navigator.pop(context);
                                   // Refresh data after updating
                                   setState(() {
