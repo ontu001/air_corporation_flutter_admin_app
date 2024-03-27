@@ -93,49 +93,10 @@ class OrderController extends GetxController {
     return false;
   }
 
-  var orderCreteBody = {
-    "customer_name": "Test costomer",
-    "phone_number": "01686381900",
-    "address_details": "Address details",
-    "district": "Dhaka",
-    "order_note": "Any order note",
-    "paid_status": "unpaid", // paid
-    "order_from": "message", // daraz
-    "special_discount": 10,
-    "advance_payment": 50,
-    "delivery_charge": 50,
-    "items": [
-      {
-        "product_name": "Product 1",
-        "product_color": "Red",
-        "product_size": "L",
-        "quantity": 1,
-        "buy_price": 100,
-        "mrp": 200,
-        "sell_price": 150
-      },
-      {
-        "product_name": "Product 1",
-        "product_color": "Green",
-        "product_size": "XL",
-        "quantity": 2,
-        "buy_price": 600,
-        "mrp": 700,
-        "sell_price": 700
-      },
-      {
-        "product_name": "Product 1",
-        "product_color": "Blue",
-        "product_size": "M",
-        "quantity": 3,
-        "buy_price": 1400,
-        "mrp": 1800,
-        "sell_price": 1700
-      }
-    ]
-  };
 
-  Future<bool> orderCreate() async {
+
+
+  Future<bool> orderCreate(var orderCreteBody) async {
     try {
       isLoading.value = true;
       final res = await ApiServices.create(
