@@ -18,9 +18,10 @@ class _AddNewOrderState extends State<AddNewOrder> {
 
     TextEditingController _customerPhoneNumberController = TextEditingController();
     TextEditingController _customerNameController = TextEditingController();
-    TextEditingController _3Controller = TextEditingController();
-    TextEditingController _4Controller = TextEditingController();
-    TextEditingController _5Controller = TextEditingController();
+    TextEditingController _districtController = TextEditingController();
+    TextEditingController _addressController = TextEditingController();
+    TextEditingController _paidStatusController = TextEditingController();
+    TextEditingController _orderNoteController = TextEditingController();
     TextEditingController _6Controller = TextEditingController();
     TextEditingController _7Controller = TextEditingController();
     TextEditingController _8Controller = TextEditingController();
@@ -64,21 +65,22 @@ class _AddNewOrderState extends State<AddNewOrder> {
               ),
               CustomTextFiledforAddAndEditOrder(
                 hintText: "District",
-                controller: _3Controller,
+                controller: _districtController,
               ),
               CustomTextFiledforAddAndEditOrder(
                 hintText: "Customer Address",
-                controller: _4Controller,
+                controller: _addressController,
               ),
               CustomTextFiledforAddAndEditOrder(
                 hintText: "Payment Status",
+                controller: _paidStatusController,
               ),
               CustomTextFiledforAddAndEditOrder(
                 hintText: "Order form",
               ),
               CustomTextFiledforAddAndEditOrder(
                 hintText: "Order Note",
-                controller: _5Controller,
+                controller: _orderNoteController,
               ),
               SizedBox(
                 height: 10,
@@ -157,11 +159,10 @@ class _AddNewOrderState extends State<AddNewOrder> {
                       var orderCreteBody = {
                         "customer_name": _customerNameController.text,
                         "phone_number":_customerPhoneNumberController.text,
-                      //  "phone_number": "01686381789",
-                        "address_details": "Address details",
-                        "district": "Dhaka",
-                        "order_note": "Any order note",
-                        "paid_status": "unpaid", // paid
+                        "address_details": _addressController.text,
+                        "district": _districtController.text,
+                        "order_note": _orderNoteController.text,
+                        "paid_status": _paidStatusController.text, // paid
                         "order_from": "message", // daraz
                         "special_discount": 10,
                         "advance_payment": 50,
