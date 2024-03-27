@@ -1,7 +1,6 @@
 import 'package:air_corporation/common/app_color.dart';
 import 'package:air_corporation/common/page_route.dart';
 
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -42,10 +41,8 @@ class MyApp extends StatelessWidget {
         getPages: getPages,
         title: 'Air Corporation',
         theme: ThemeData(
-    
           primaryColor: kPrimaryColor,
         ),
-    
         home: SplashScreen(),
       ),
     );
