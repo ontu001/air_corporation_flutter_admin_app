@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../main.dart';
 
+import '../views/add_new_order.dart';
 import '../views/change_password_screen.dart';
 
 
@@ -23,7 +24,7 @@ var getPages = [
   GetPage(name: "/homeScreen", page: () => HomeScreen()),
   GetPage(name: "/profileScreen", page: () => ProfileScreen()),
   GetPage(name: "/changePasswordScreen", page: () => ChangePasswordScreen()),
-  GetPage(name: "/OrderSubmitScreen", page: () => OrderSubmitScreen()),
+  GetPage(name: "/OrderSubmitScreen", page: () => AddNewOrder()),
   GetPage(name: "/OrderList", page: () => OrderList()),
   GetPage(name: "/OrderStatus", page: () => OrderStatus()),
   GetPage(name: "/OrderReport", page: () => OrderReport()),

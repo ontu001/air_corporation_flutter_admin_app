@@ -12,12 +12,12 @@ class OrderStatus extends StatefulWidget {
 
 class _OrderStatusState extends State<OrderStatus> {
   StatusController statusController = Get.put(StatusController());
-
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _bgColorController = TextEditingController();
-  TextEditingController _textColorController = TextEditingController();
-
-
+  //
+  // TextEditingController _nameController = TextEditingController();
+  // TextEditingController _bgColorController = TextEditingController();
+  // TextEditingController _textColorController = TextEditingController();
+  //
+  //
 
   @override
   Widget build(BuildContext context) {
