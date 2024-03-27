@@ -7,8 +7,20 @@ import '../widget/custom_bottom_bar_for_order_screen.dart';
 import 'add_new_order.dart';
 
 
-class OrderList extends StatelessWidget {
+class OrderList extends StatefulWidget {
+  @override
+  State<OrderList> createState() => _OrderListState();
+}
+
+class _OrderListState extends State<OrderList> {
   OrderController orderController = Get.put(OrderController());
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    orderController.fetchOrders();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
