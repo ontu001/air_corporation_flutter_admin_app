@@ -12,12 +12,12 @@ class OrderStatus extends StatefulWidget {
 
 class _OrderStatusState extends State<OrderStatus> {
   StatusController statusController = Get.put(StatusController());
-
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _bgColorController = TextEditingController();
-  TextEditingController _textColorController = TextEditingController();
-
-
+  //
+  // TextEditingController _nameController = TextEditingController();
+  // TextEditingController _bgColorController = TextEditingController();
+  // TextEditingController _textColorController = TextEditingController();
+  //
+  //
 
   @override
   Widget build(BuildContext context) {
@@ -78,44 +78,44 @@ class _OrderStatusState extends State<OrderStatus> {
                         "Status : null",
                         style: kTextStyle,
                       ),
-                      Center(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            showModalBottomSheet(
-                              context: context,
-                              builder: (context) => bottomSheet(
-                                bottomSheetTitle: "Edit Order Statuses",
-                                buttonText: "Submit",
-                                filed1: _nameController,
-                                filed2: _bgColorController,
-                                filed3: _textColorController,
-                                hint1: "Order Name",
-                                hint2: "Background Color",
-                                hint3: "Text Color",
-                                onPressed: () async {
-                                  await statusController.feupdateStatus(
-                                    statusController.status.result?.data?[index].id ?? 1,
-                                    {
-                                      "name": _nameController.text,
-                                      "bg_color": _bgColorController.text,
-                                      "text_color": _textColorController.text,
-                                    },
-                                  );
-                                  _nameController.clear();
-                                  _bgColorController.clear();
-                                  _textColorController.clear();
-                                  Navigator.pop(context);
-                                  // Refresh data after updating
-                                  setState(() {
-                                    statusController.fetchStatus();
-                                  });
-                                },
-                              ),
-                            );
-                          },
-                          child: Text("Edit"),
-                        ),
-                      ),
+                      // Center(
+                      //   child: ElevatedButton(
+                      //     onPressed: () {
+                      //       showModalBottomSheet(
+                      //         context: context,
+                      //         builder: (context) => bottomSheet(
+                      //           bottomSheetTitle: "Edit Order Statuses",
+                      //           buttonText: "Submit",
+                      //           filed1: _nameController,
+                      //           filed2: _bgColorController,
+                      //           filed3: _textColorController,
+                      //           hint1: "Order Name",
+                      //           hint2: "Background Color",
+                      //           hint3: "Text Color",
+                      //           onPressed: () async {
+                      //             await statusController.feupdateStatus(
+                      //               statusController.status.result?.data?[index].id ?? 1,
+                      //               {
+                      //                 "name": _nameController.text,
+                      //                 "bg_color": _bgColorController.text,
+                      //                 "text_color": _textColorController.text,
+                      //               },
+                      //             );
+                      //             _nameController.clear();
+                      //             _bgColorController.clear();
+                      //             _textColorController.clear();
+                      //             Navigator.pop(context);
+                      //             // Refresh data after updating
+                      //             setState(() {
+                      //               statusController.fetchStatus();
+                      //             });
+                      //           },
+                      //         ),
+                      //       );
+                      //     },
+                      //     child: Text("Edit"),
+                      //   ),
+                      // ),
                     ],
                   ),
                 );

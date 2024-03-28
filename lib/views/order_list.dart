@@ -16,6 +16,13 @@ class _OrderListState extends State<OrderList> {
   OrderController orderController = Get.put(OrderController());
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    orderController.fetchOrders();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

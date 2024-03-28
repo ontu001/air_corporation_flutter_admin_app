@@ -1,3 +1,4 @@
+import 'package:air_corporation/common/constant.dart';
 import 'package:air_corporation/controller/orders_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,27 +12,30 @@ class AddNewOrder extends StatefulWidget {
 }
 
 class _AddNewOrderState extends State<AddNewOrder> {
+  String? _selectedPayment;
+  String? _selectedOrder;
+  final orderController =
+  Get.find<OrderController>(); // Access the controller
+
+  TextEditingController _customerPhoneNumberController = TextEditingController();
+  TextEditingController _customerNameController = TextEditingController();
+  TextEditingController _districtController = TextEditingController();
+  TextEditingController _addressController = TextEditingController();
+  TextEditingController _paidStatusController = TextEditingController();
+  TextEditingController _orderNoteController = TextEditingController();
+  TextEditingController _6Controller = TextEditingController();
+  TextEditingController _7Controller = TextEditingController();
+  TextEditingController _8Controller = TextEditingController();
+  TextEditingController _9Controller = TextEditingController();
+  TextEditingController _10Controller = TextEditingController();
+  TextEditingController _11Controller = TextEditingController();
+  TextEditingController _12Controller = TextEditingController();
+  TextEditingController _13Controller = TextEditingController();
+  TextEditingController _14Controller = TextEditingController();
+  TextEditingController _15Controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final orderController =
-        Get.find<OrderController>(); // Access the controller
 
-    TextEditingController _customerPhoneNumberController = TextEditingController();
-    TextEditingController _customerNameController = TextEditingController();
-    TextEditingController _districtController = TextEditingController();
-    TextEditingController _addressController = TextEditingController();
-    TextEditingController _paidStatusController = TextEditingController();
-    TextEditingController _orderNoteController = TextEditingController();
-    TextEditingController _6Controller = TextEditingController();
-    TextEditingController _7Controller = TextEditingController();
-    TextEditingController _8Controller = TextEditingController();
-    TextEditingController _9Controller = TextEditingController();
-    TextEditingController _10Controller = TextEditingController();
-    TextEditingController _11Controller = TextEditingController();
-    TextEditingController _12Controller = TextEditingController();
-    TextEditingController _13Controller = TextEditingController();
-    TextEditingController _14Controller = TextEditingController();
-    TextEditingController _15Controller = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
@@ -54,7 +58,7 @@ class _AddNewOrderState extends State<AddNewOrder> {
           child: ListView(
             scrollDirection: Axis.vertical,
             children: [
-              Text("Order Information"),
+              Text("Order Information",style: kTextStyleBold,),
               CustomTextFiledforAddAndEditOrder(
                 hintText: "Customer Phone Number",
                 controller: _customerPhoneNumberController,
@@ -71,27 +75,87 @@ class _AddNewOrderState extends State<AddNewOrder> {
                 hintText: "Customer Address",
                 controller: _addressController,
               ),
-              CustomTextFiledforAddAndEditOrder(
-                hintText: "Payment Status",
-                controller: _paidStatusController,
+
+
+
+
+
+
+              Container(
+                padding: EdgeInsets.all(10.0),
+                margin: EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                    border: Border.all(),
+                    borderRadius: BorderRadius.circular(10.0)
+                ),
+                child: DropdownButton<String>(
+                  hint: Text('Payment Status'),
+                  value: _selectedPayment,
+                  onChanged: (newValue ){
+                    setState(() {
+                       _selectedPayment = newValue;
+                    });
+                  },
+                  items: <String>['paid', 'unpaid'].map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
               ),
-              CustomTextFiledforAddAndEditOrder(
-                hintText: "Order form",
+
+
+
+
+
+
+              Container(
+                padding: EdgeInsets.all(10.0),
+                margin: EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                    border: Border.all(),
+                    borderRadius: BorderRadius.circular(10.0)
+                ),
+                child: DropdownButton<String>(
+                  hint: Text('Order From'),
+                  value: _selectedOrder,
+                  onChanged: (newValue ){
+                    setState(() {
+                      _selectedOrder = newValue;
+                    });
+                  },
+                  items: <String>['Messenger', 'Whatsapp', 'Facebook', 'Message', 'Phone', 'Website', 'Landing page', 'Others'].map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
               ),
+
+
+
+
               CustomTextFiledforAddAndEditOrder(
                 hintText: "Order Note",
                 controller: _orderNoteController,
               ),
+
+
+
+
+
               SizedBox(
                 height: 10,
               ),
+              Text("Product Infromation",style: kTextStyleBold,),
               CustomTextFiledforAddAndEditOrder(
                 hintText: "contact name",
               ),
               SizedBox(
                 height: 10,
               ),
-              Text("Product Information"),
               CustomTextFiledforAddAndEditOrder(
                 hintText: "Product Name",
                 controller: _6Controller,
@@ -101,11 +165,11 @@ class _AddNewOrderState extends State<AddNewOrder> {
                 controller: _7Controller,
               ),
               CustomTextFiledforAddAndEditOrder(
-                hintText: "mrp price",
+                hintText: "Mrp price",
                 controller: _8Controller,
               ),
               CustomTextFiledforAddAndEditOrder(
-                hintText: "sell price",
+                hintText: "Sell price",
                 controller: _9Controller,
               ),
               CustomTextFiledforAddAndEditOrder(
@@ -120,23 +184,33 @@ class _AddNewOrderState extends State<AddNewOrder> {
                 hintText: "Color",
                 controller: _12Controller,
               ),
+
+
+
+              // Order add api will be call here
               ElevatedButton(
                   style:
                       ElevatedButton.styleFrom(backgroundColor: Colors.orange),
-                  onPressed: () {},
+                  onPressed: () {
+                    // Order add api will be call here
+                  },
                   child: Text("ADD")),
+              // ========================
+
+
+
+              SizedBox(
+                height: 40.0,
+              ),
+              Text("Regular Price : 0 tk",style: kTextStyleBold1,),
               SizedBox(
                 height: 10,
               ),
-              Text("Regular Price : 0bdt"),
+              Text("Discount : 0 tk",style: kTextStyleBold1,),
               SizedBox(
                 height: 10,
               ),
-              Text("Discount : 0bdt"),
-              SizedBox(
-                height: 10,
-              ),
-              Text("Offer Price : 0bdt"),
+              Text("Offer Price :   0 tk",style: kTextStyleBold1,),
               CustomTextFiledforAddAndEditOrder(
                 hintText: "Advanced Payment",
                 controller: _13Controller,
@@ -149,7 +223,12 @@ class _AddNewOrderState extends State<AddNewOrder> {
                 hintText: "Discount price",
                 controller: _15Controller,
               ),
-              Text("Payable Price: 0bdt"),
+
+
+
+
+
+              Text("Payable Price: 0 tk",style: kTextStyleBold1,),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
@@ -203,12 +282,12 @@ class _AddNewOrderState extends State<AddNewOrder> {
                           await orderController.orderCreate(orderCreteBody);
                       if (result == true) {
                         Get.snackbar("Order Added", "Order Added Successfully");
-                      
+
                       // setState(() {
                       //  orderController.fetchOrders();
-                        
+
                       // });
-                       
+
 
                       } else {
                         Get.snackbar("Failed", "Something went worng!",

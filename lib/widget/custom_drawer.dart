@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../common/app_color.dart';
 import '../common/variables.dart';
+import '../controller/Status_controller.dart';
+import '../controller/orders_controller.dart';
 import '../services/auth_services.dart';
 
 import '../views/all_statuses_list.dart';
@@ -9,11 +11,21 @@ import '../views/order_list.dart';
 import '../views/order_report.dart';
 import 'my_text_style.dart';
 
-class CustomDrawer extends StatelessWidget {
-  const CustomDrawer({super.key});
+class CustomDrawer extends StatefulWidget {
+
 
   @override
+  State<CustomDrawer> createState() => _CustomDrawerState();
+}
+
+class _CustomDrawerState extends State<CustomDrawer> {
+  @override
+  OrderController orderController = Get.put( OrderController());
+  StatusController statusController = Get.put(StatusController());
+
+
   Widget build(BuildContext context) {
+
     Size size = MediaQuery.of(context).size;
     return Drawer(
       child: SafeArea(
@@ -33,7 +45,7 @@ class CustomDrawer extends StatelessWidget {
                 height: size.width * 0.18,
                 fit: BoxFit.cover,
               ),
-              
+
             ),
             Expanded(
               child: ListView(
@@ -46,23 +58,42 @@ class CustomDrawer extends StatelessWidget {
                     icon: Icons.home_outlined,
                   ),
                   menulist(
-                    onTap: () => Get.to(OrderList()),
+                    onTap: () async{
+                      setState(() {
+                        orderController.fetchOrders();
+                      });
+                     await Get.to(OrderList());
+
+
+                    },
+
+
+
                     title: "Orders",
                     icon: Icons.shop,
                   ),
 
+
                   menulist(
-                    onTap: () => Get.to(OrderStatus()),
+                  //  onTap: () async => await Get.to(OrderStatus()),
+
+                    onTap:() async{
+                      setState(() {
+                        statusController.fetchStatus();
+
+                      });
+                      await Get.to(OrderStatus());
+                    },
                     title: "OrderStatus",
                     icon: Icons.info,
                   ),
 
                   menulist(
-                    onTap: () =>Get.to(OrderReport()),
+                    onTap: () async=> await Get.to(OrderReport()),
                     title: "OrderReport",
                     icon: Icons.report,
                   ),
-               
+
                   menulist(
                     onTap: () => AuthServices().logOut(),
                     title: "Log Out",

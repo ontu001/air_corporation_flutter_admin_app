@@ -37,8 +37,10 @@ class MyApp extends StatelessWidget {
         getPages: getPages,
         title: 'Air Corporation',
         theme: ThemeData(
+    
           primaryColor: kPrimaryColor,
         ),
+    
         home: SplashScreen(),
       ),
     );
