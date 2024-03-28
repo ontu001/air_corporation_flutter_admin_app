@@ -8,9 +8,10 @@ import '../widget/custom_text_fied_for_addorder_editorder.dart';
 
 class EditOrder extends StatefulWidget {
    int id;
-   int index;
+   var index;
+   var phoneNumber;
 
-   EditOrder({super.key, required this.id, required this.index});
+   EditOrder({super.key, required this.id, required this.index, required this.phoneNumber});
 
   @override
   State<EditOrder> createState() => _EditOrderState();
@@ -21,9 +22,7 @@ class _EditOrderState extends State<EditOrder> {
   String? _selectedPayment;
   String? _selectedOrder;
  // var orderController = Get.find<OrderController>(); // Access the controller
-
- 
-
+  OrderController orderController = OrderController();
 
 
  
@@ -32,13 +31,13 @@ class _EditOrderState extends State<EditOrder> {
  @override
   Widget build(BuildContext context) {
 
-     OrderController orderController = OrderController();
+   
 
        TextEditingController _customerPhoneNumberController = 
-  TextEditingController(text: "kfdfjksd");
+  TextEditingController(text: widget.phoneNumber);
 
     // TextEditingController();
-  TextEditingController _customerNameController = TextEditingController(text: orderController.orderList.value?.result?.data?[widget.index].phoneNumber.toString());
+  TextEditingController _customerNameController = TextEditingController();
   TextEditingController _districtController = TextEditingController();
   TextEditingController _addressController = TextEditingController();
   TextEditingController _orderNoteController = TextEditingController();
@@ -269,7 +268,7 @@ class _EditOrderState extends State<EditOrder> {
                       // String jsonString = jsonEncode(items);
                       // var itemObject = ProductModel.toJson(jsonString);
 
-                      var orderCreteBody = {
+                      var orderUpdateBody = {
                         "customer_name": _customerNameController.text,
                         "phone_number": _customerPhoneNumberController.text,
                         "address_details": _addressController.text,
@@ -280,43 +279,15 @@ class _EditOrderState extends State<EditOrder> {
                         "special_discount": _discountPriceController.text,
                         "advance_payment": _advancedPaymentController.text,
                         "delivery_charge": _deliveryChargeController.text,
+                        "status_id": 2,
                         "items": productItems
-                        // items
-
-                        // [
-                        //   {
-                        //     "product_name": "Product 1",
-                        //     "product_color": "Red",
-                        //     "product_size": "L",
-                        //     "quantity": 1,
-                        //     "buy_price": 100,
-                        //     "mrp": 200,
-                        //     "sell_price": 150
-                        //   },
-                        //   {
-                        //     "product_name": "Product 1",
-                        //     "product_color": "Green",
-                        //     "product_size": "XL",
-                        //     "quantity": 2,
-                        //     "buy_price": 600,
-                        //     "mrp": 700,
-                        //     "sell_price": 700
-                        //   },
-                        //   {
-                        //     "product_name": "Product 1",
-                        //     "product_color": "Blue",
-                        //     "product_size": "M",
-                        //     "quantity": 3,
-                        //     "buy_price": 1400,
-                        //     "mrp": 1800,
-                        //     "sell_price": 1700
-                        //   }
-                        // ]
+                       
                       };
 
                       //print("object");
                       // bool result =
-                      await orderController.orderCreate(orderCreteBody);
+                      await orderController.orderUpdate(widget.id, orderUpdateBody);
+                     // orderCreate(orderCreteBody);
                       // if (result == true) {
                       //   Get.snackbar("Order Added", "Order Added Successfully");
                       // } else {

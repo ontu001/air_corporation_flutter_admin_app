@@ -4,6 +4,7 @@ import 'package:air_corporation/controller/orders_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../common/app_color.dart';
+import '../controller/Status_controller.dart';
 import '../widget/custom_text_fied_for_addorder_editorder.dart';
 
 class AddNewOrder extends StatefulWidget {
@@ -15,6 +16,7 @@ class _AddNewOrderState extends State<AddNewOrder> {
   String? _selectedPayment;
   String? _selectedOrder;
   final orderController = Get.find<OrderController>(); // Access the controller
+  StatusController statusController = Get.put(StatusController());
 
   TextEditingController _customerPhoneNumberController =
       TextEditingController();
@@ -306,6 +308,11 @@ class _AddNewOrderState extends State<AddNewOrder> {
                       //   Get.snackbar("Failed", "Something went worng!",
                       //       colorText: Colors.red);
                       // }
+                      Navigator.pop(context);
+                      setState(() {
+                        statusController.fetchStatus();
+                      });
+
                     },
                     child: Text(
                       "ADD ORDER",

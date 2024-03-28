@@ -52,7 +52,7 @@ class OrderController extends GetxController {
     }
   }
 
-  Future<bool> orderUpdate(int id, var orderUpdatebody) async {
+  Future<void> orderUpdate(int id, var orderUpdatebody) async {
     try {
       isLoading.value = true;
       final res = await ApiServices.update(
@@ -72,26 +72,30 @@ class OrderController extends GetxController {
         if (res.statusCode == 200) {
           isLoading.value = false;
 
+          Get.snackbar("Order Added", "Order Added Successfully");
+
           print("aita e orderUpdatecheck >>>>>>> ${res.body}");
 
-          Map<String, dynamic> jsonData = jsonDecode(res.body);
+          //   Map<String, dynamic> jsonData = jsonDecode(res.body);
 
-          orderUpdatecheck = OrderUpdateModel.fromJson(jsonData);
+          //   orderUpdatecheck = OrderUpdateModel.fromJson(jsonData);
 
           // print("status: >>>>>>> ${status.result?.data?[0].bgColor}");
           // print("status 2: >>>>>>> ${status.result?.data?[0].textColor}");
-          return true;
+          // return true;
         } else {
           isLoading.value = false;
-          return false;
+          Get.snackbar("Failed", "Something went worng!",
+              colorText: Colors.red);
+
+          // return false;
         }
       }
     } catch (e) {
       isLoading.value = false;
+      Get.snackbar("Failed", "Something went worng!", colorText: Colors.red);
       print(e);
-      return false;
     }
-    return false;
   }
 
   Future<void> orderCreate(var orderCreteBody) async {
@@ -113,33 +117,34 @@ class OrderController extends GetxController {
       if (res.body != null) {
         if (res.statusCode == 200) {
           isLoading.value = false;
-        Get.snackbar("Order Added", "Order Added Successfully");
-
+          Get.snackbar("Order Added", "Order Added Successfully");
 
           print("aita e orderCretecheck >>>>>>> ${res.body}");
 
-         // Map<String, dynamic> jsonData = jsonDecode(res.body);
+          // Map<String, dynamic> jsonData = jsonDecode(res.body);
 
           //ai khane model crete kore call dite hove;
           //response na aser karone akhon aibabe diye rakhse;
-       //   orderUpdatecheck = OrderUpdateModel.fromJson(jsonData);
+          //   orderUpdatecheck = OrderUpdateModel.fromJson(jsonData);
 
           // print("status: >>>>>>> ${status.result?.data?[0].bgColor}");
           // print("status 2: >>>>>>> ${status.result?.data?[0].textColor}");
-         // return true;
+          // return true;
         } else {
           isLoading.value = false;
-               Get.snackbar("Failed", "Something went worng!",
-                            colorText: Colors.red);
-        //  return false;
+          Get.snackbar("Failed", "Something went worng!",
+              colorText: Colors.red);
+          //  return false;
         }
       }
     } catch (e) {
       isLoading.value = false;
+      Get.snackbar("Failed", "Something went worng!", colorText: Colors.red);
       print(e);
-    ///  return false;
+
+      ///  return false;
     }
-   // return false;
+    // return false;
   }
 
   Future<bool> orderDelete(int id) async {
