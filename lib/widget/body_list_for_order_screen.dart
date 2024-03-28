@@ -47,7 +47,9 @@ class _BoyListFOrOrderScreenState extends State<BoyListFOrOrderScreen> {
 
                         IconButton(
                             onPressed: () async{
-                              await  Get.to(EditOrder( id:  orderController.orderList.value?.result?.data?[index].id ?? 0));
+                              await  Get.to(EditOrder( id:  orderController.orderList.value?.result?.data?[index].id ?? 0 ,
+                              index: index,
+                              ));
                             },
                             icon: Icon(Icons.edit)),
 

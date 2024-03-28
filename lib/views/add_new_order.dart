@@ -34,6 +34,7 @@ class _AddNewOrderState extends State<AddNewOrder> {
   TextEditingController _advancedPaymentController = TextEditingController();
   TextEditingController _deliveryChargeController = TextEditingController();
   TextEditingController _discountPriceController = TextEditingController();
+ 
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> productItems = [];
@@ -317,4 +318,6 @@ class _AddNewOrderState extends State<AddNewOrder> {
       ),
     );
   }
+
+
 }
