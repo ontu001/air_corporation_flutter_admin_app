@@ -14,6 +14,7 @@ class BoyListFOrOrderScreen extends StatefulWidget {
 
 class _BoyListFOrOrderScreenState extends State<BoyListFOrOrderScreen> {
   OrderController orderController = OrderController();
+  
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +22,11 @@ class _BoyListFOrOrderScreenState extends State<BoyListFOrOrderScreen> {
       return Expanded(
         child: Padding(
           padding: const EdgeInsets.only(bottom: 8, left: 8, right: 8, top: 10),
-          child: ListView.builder(
-            itemCount: controller.orderList.result?.data?.length ?? 0,
+          child:
+          Obx((){
+
+            return   ListView.builder(
+            itemCount: controller.orderList.value?.result?.data?.length ?? 0,
             itemBuilder: (context, index) {
               return Container(
                 padding: EdgeInsets.all(20.0),
@@ -46,35 +50,35 @@ class _BoyListFOrOrderScreenState extends State<BoyListFOrOrderScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Text(
-                                "Order id : ${controller.orderList.result?.data![index].id.toString()}",
+                                "Order id : ${controller.orderList.value?.result?.data?[index].id.toString()}",
                                 style: kTextStyle,
                               ),
                               Text(
-                                "Status : ${controller.orderList.result?.data![index].status?.name.toString()}",
+                                "Status : ${controller.orderList.value?.result?.data?[index].status?.name.toString()}",
                                 style: kTextStyle,
                               ),
                               Text(
-                                "Phone : ${controller.orderList.result?.data![index].phoneNumber.toString()}",
+                                "Phone : ${controller.orderList.value?.result?.data?[index].phoneNumber.toString()}",
                                 style: kTextStyle,
                               ),
                               Text(
-                                "Date : ${controller.orderList.result?.data![index].createdAt.toString().substring(0, controller.orderList.result?.data![index].createdAt.toString().indexOf('T'))}",
+                                "Date : ${controller.orderList.value?.result?.data?[index].createdAt.toString().substring(0, controller.orderList.value?.result?.data![index].createdAt.toString().indexOf('T'))}",
                                 style: kTextStyle,
                               ),
                               Text(
-                                "Currier : ${controller.orderList.result?.data![index].courierName.toString() == "null" ? " " : controller.orderList.result?.data![index].courierName.toString()}",
+                                "Currier : ${controller.orderList.value?.result?.data?[index].courierName.toString() == "null" ? " " : controller.orderList.value?.result?.data![index].courierName.toString()}",
                                 style: kTextStyle,
                               ),
                               Text(
-                                "Paid Status : ${controller.orderList.result?.data![index].paidStatus.toString()}",
+                                "Paid Status : ${controller.orderList.value?.result?.data![index].paidStatus.toString()}",
                                 style: kTextStyle,
                               ),
                               Text(
-                                "Updated by : ${controller.orderList.result?.data![index].updatedBy?.name.toString()}",
+                                "Updated by : ${controller.orderList.value?.result?.data?[index].updatedBy?.name.toString()}",
                                 style: kTextStyle,
                               ),
                               Text(
-                                "Payable Amount : ${controller.orderList.result?.data![index].payablePrice.toString()}",
+                                "Payable Amount : ${controller.orderList.value?.result?.data?[index].payablePrice.toString()}",
                                 style: kTextStyle,
                               ),
                             ],
@@ -118,7 +122,7 @@ class _BoyListFOrOrderScreenState extends State<BoyListFOrOrderScreen> {
                         Checkbox(value: true, onChanged: (value) {}),
                         IconButton(
                             onPressed: () async{
-                            await  Get.to(EditOrder( id:  orderController.orderList.result?.data?[index].id ?? 0));
+                            await  Get.to(EditOrder( id:  orderController.orderList.value?.result?.data?[index].id ?? 0 ));
                             },
                             icon: Icon(Icons.edit)),
                         IconButton(onPressed: () {}, icon: Icon(Icons.print)),
@@ -147,7 +151,7 @@ class _BoyListFOrOrderScreenState extends State<BoyListFOrOrderScreen> {
                                         // Handle confirm action
 
                                         var result =
-                                            await controller.orderDelete(controller.orderList.result?.data?[index].id ?? 0);
+                                            await controller.orderDelete(controller.orderList.value?.result?.data?[index].id ?? 0);
                                         if (result == true) {
                                           Get.snackbar("Deleted",
                                               "Item deleted successfully");
@@ -185,7 +189,12 @@ class _BoyListFOrOrderScreenState extends State<BoyListFOrOrderScreen> {
                 ),
               );
             },
-          ),
+          );
+       
+
+          }),
+          
+         
         ),
       );
     });
