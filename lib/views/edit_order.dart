@@ -401,21 +401,21 @@ class _EditOrderState extends State<EditOrder> {
                         };
 
                         //print("object");
-                        bool result =
+                        // bool result =
                         await orderController.orderCreate(orderCreteBody);
-                        if (result == true) {
-                          Get.snackbar("Order Added", "Order Added Successfully");
+                       // if (result == true) {
+                        //   Get.snackbar("Order Added", "Order Added Successfully");
 
-                          // setState(() {
-                          //  orderController.fetchOrders();
+                        //   // setState(() {
+                        //   //  orderController.fetchOrders();
 
-                          // });
+                        //   // });
 
 
-                        } else {
-                          Get.snackbar("Failed", "Something went worng!",
-                              colorText: Colors.red);
-                        }
+                        // } else {
+                        //   Get.snackbar("Failed", "Something went worng!",
+                        //       colorText: Colors.red);
+                        // }
                       },
                       child: Text(
                         "Update Order",

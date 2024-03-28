@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:air_corporation/model/order_update_model.dart';
 import 'package:air_corporation/model/orders_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../services/api_service.dart';
@@ -93,7 +94,7 @@ class OrderController extends GetxController {
     return false;
   }
 
-  Future<bool> orderCreate(var orderCreteBody) async {
+  Future<void> orderCreate(var orderCreteBody) async {
     try {
       isLoading.value = true;
       final res = await ApiServices.create(
@@ -112,29 +113,33 @@ class OrderController extends GetxController {
       if (res.body != null) {
         if (res.statusCode == 200) {
           isLoading.value = false;
+        Get.snackbar("Order Added", "Order Added Successfully");
+
 
           print("aita e orderCretecheck >>>>>>> ${res.body}");
 
-          Map<String, dynamic> jsonData = jsonDecode(res.body);
+         // Map<String, dynamic> jsonData = jsonDecode(res.body);
 
           //ai khane model crete kore call dite hove;
           //response na aser karone akhon aibabe diye rakhse;
-          orderUpdatecheck = OrderUpdateModel.fromJson(jsonData);
+       //   orderUpdatecheck = OrderUpdateModel.fromJson(jsonData);
 
           // print("status: >>>>>>> ${status.result?.data?[0].bgColor}");
           // print("status 2: >>>>>>> ${status.result?.data?[0].textColor}");
-          return true;
+         // return true;
         } else {
           isLoading.value = false;
-          return false;
+               Get.snackbar("Failed", "Something went worng!",
+                            colorText: Colors.red);
+        //  return false;
         }
       }
     } catch (e) {
       isLoading.value = false;
       print(e);
-      return false;
+    ///  return false;
     }
-    return false;
+   // return false;
   }
 
   Future<bool> orderDelete(int id) async {
