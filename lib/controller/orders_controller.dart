@@ -72,7 +72,7 @@ class OrderController extends GetxController {
         if (res.statusCode == 200) {
           isLoading.value = false;
 
-          Get.snackbar("Order Added", "Order Added Successfully");
+          Get.snackbar("Order Update", "Order Update Successfully");
 
           print("aita e orderUpdatecheck >>>>>>> ${res.body}");
 
