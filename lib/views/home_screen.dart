@@ -99,6 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           if (itemList[index]['title'] == "OrdersList") {
 
                             await orderController.fetchOrders();
+                            await statusController.fetchStatus();
                           }
                           if (itemList[index]['title'] == "OrderStatus") {
                             await statusController.fetchStatus();

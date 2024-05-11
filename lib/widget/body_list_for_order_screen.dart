@@ -50,6 +50,17 @@ class _BoyListFOrOrderScreenState extends State<BoyListFOrOrderScreen> {
                                 Get.to(EditOrder( id:  controller.orderList.value?.result?.data?[index].id ?? 0 ,
                               index: index, 
                               phoneNumber: controller.orderList.value?.result?.data?[index].phoneNumber.toString() ?? "kk ",
+                                  customerName: controller.orderList.value?.result?.data?[index].customerName.toString() ?? "no name",
+                                  distc:controller.orderList.value?.result?.data?[index].district.toString() ?? "no name" ,
+                                   cAddress: controller.orderList.value?.result?.data?[index].addressDetails.toString() ?? "no name",
+                                  orderStatus: controller.orderList.value?.result?.data?[index].paidStatus.toString() ?? "no name",
+                                  orderForm: controller.orderList.value?.result?.data?[index].orderFrom.toString() ?? "no name",
+                                  orderNote: controller.orderList.value?.result?.data?[index].orderNote.toString() ?? "no name",
+                                  contactName: controller.orderList.value?.result?.data?[index].customerName.toString() ?? "no name",
+                                  buyPrice: controller.orderList.value?.result?.data?[index].buyPrice.toString() ?? "no name",
+                                  mrpPrice: controller.orderList.value?.result?.data?[index].mrp.toString() ?? "no name",
+                                  sellPrice: controller.orderList.value?.result?.data?[index].sellPrice.toString() ?? "no name",
+
                               ));
                             },
                             icon: Icon(Icons.edit)),

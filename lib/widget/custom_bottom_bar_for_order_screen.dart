@@ -1,9 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
+import '../controller/Status_controller.dart';
 import 'custom_button.dart';
 
-class CustomBottomForOrderScreen extends StatelessWidget{
+class CustomBottomForOrderScreen extends StatefulWidget{
+  @override
+  State<CustomBottomForOrderScreen> createState() => _CustomBottomForOrderScreenState();
+}
+
+class _CustomBottomForOrderScreenState extends State<CustomBottomForOrderScreen> {
+  StatusController statusController = Get.put(StatusController());
+  @override
+  void initState() {
+    statusController.fetchStatus();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -12,48 +25,20 @@ class CustomBottomForOrderScreen extends StatelessWidget{
       width: double.maxFinite,
 
 
-      child: ListView(
+      child: ListView.builder(
         padding: EdgeInsets.symmetric(horizontal: 10),
 
+
+
         scrollDirection: Axis.horizontal,
-        children: [
-
-
-
-
-          CustomButton(onTap: (){}, title: 'all',),
-          SizedBox(width: 7,),
-          CustomButton(onTap: (){}, title: 'on way',),
-          SizedBox(width: 7,),
-
-          CustomButton(onTap: (){}, title: 'submit',),
-          SizedBox(width: 7,),
-          CustomButton(onTap: (){
-
-
-           Get.toNamed('/holdOnScreen',
-            // arguments: {'id': 123}
-            );
-
-          }, title: 'hold on',),
-          SizedBox(width: 7,),
-          CustomButton(onTap: (){}, title: 'Under Verified',),
-          SizedBox(width: 7,),
-          CustomButton(onTap: (){}, title: 'canceled',),
-          SizedBox(width: 7,),
-
-          CustomButton(onTap: (){}, title: 'Under processing',),
-          SizedBox(width: 7,),
-          CustomButton(onTap: (){}, title: 'deliverd',),
-          SizedBox(width: 7,),
-          CustomButton(onTap: (){}, title: 'conplited',),
-          SizedBox(width: 7,),
-          CustomButton(onTap: (){}, title: 'returened',),
-
-
-        ],
+        itemCount: statusController.status.result?.data?.length ?? 0,
+        itemBuilder: (context, index){
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+            child: CustomButton(onTap: (){}, title: statusController.status.result?.data?[index].name.toString(),),
+          );
+        },
       ),
     );
   }
-
 }

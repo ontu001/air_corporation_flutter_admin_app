@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:air_corporation/common/constant.dart';
 import 'package:air_corporation/controller/orders_controller.dart';
+import 'package:air_corporation/views/order_list.dart';
+import 'package:air_corporation/widget/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../common/app_color.dart';
@@ -150,13 +152,11 @@ class _AddNewOrderState extends State<AddNewOrder> {
                 "Product Infromation",
                 style: kTextStyleBold,
               ),
-              CustomTextFiledforAddAndEditOrder(
-                hintText: "contact name",
-                controller: _contactNameController,
-              ),
-              SizedBox(
-                height: 10,
-              ),
+              // CustomTextFiledforAddAndEditOrder(
+              //   hintText: "contact name",
+              //   controller: _contactNameController,
+              // ),
+
               CustomTextFiledforAddAndEditOrder(
                 hintText: "Product Name",
                 controller: _productNameController,
@@ -202,6 +202,7 @@ class _AddNewOrderState extends State<AddNewOrder> {
                     };
 
                     productItems.add(productObject);
+                    customSnackBar(bgClr: Colors.blue, msg: "List Added Successfully");
                   },
                   child: Text("ADD")),
               // ========================
@@ -302,16 +303,9 @@ class _AddNewOrderState extends State<AddNewOrder> {
                       //print("object");
                       // bool result =
                       await orderController.orderCreate(orderCreteBody);
-                      // if (result == true) {
-                      //   Get.snackbar("Order Added", "Order Added Successfully");
-                      // } else {
-                      //   Get.snackbar("Failed", "Something went worng!",
-                      //       colorText: Colors.red);
-                      // }
-                      Navigator.pop(context);
-                      setState(() {
-                        statusController.fetchStatus();
-                      });
+                      customSnackBar(bgClr: Colors.green, msg: "Please refresh");
+                      Navigator.push(context, MaterialPageRoute(builder: (_)=>OrderList()));
+
 
                     },
                     child: Text(

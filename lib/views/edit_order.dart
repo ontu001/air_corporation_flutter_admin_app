@@ -4,14 +4,38 @@ import 'package:get/get.dart';
 
 import '../common/app_color.dart';
 import '../common/constant.dart';
+import '../widget/custom_snackbar.dart';
 import '../widget/custom_text_fied_for_addorder_editorder.dart';
 
 class EditOrder extends StatefulWidget {
    int id;
    var index;
    var phoneNumber;
+   var customerName;
+   var distc;
+   var cAddress;
+   var orderStatus;
+   var orderForm;
+   var orderNote;
+   var contactName;
+   var productName;
+   var buyPrice;
+   var mrpPrice;
+   var sellPrice;
+   var quantity;
+   var size;
+   var color;
 
-   EditOrder({super.key, required this.id, required this.index, required this.phoneNumber});
+   EditOrder({super.key, required this.id, required this.index, required this.phoneNumber, this.customerName,
+
+   this.distc,
+     this.cAddress,
+     this.orderStatus,
+     this.orderForm,this.orderNote, this.contactName, this.productName, this.buyPrice, this.mrpPrice,
+     this.sellPrice,
+     this.quantity,
+     this.size,this.color
+   });
 
   @override
   State<EditOrder> createState() => _EditOrderState();
@@ -37,15 +61,15 @@ class _EditOrderState extends State<EditOrder> {
   TextEditingController(text: widget.phoneNumber);
 
     // TextEditingController();
-  TextEditingController _customerNameController = TextEditingController();
-  TextEditingController _districtController = TextEditingController();
-  TextEditingController _addressController = TextEditingController();
-  TextEditingController _orderNoteController = TextEditingController();
+  TextEditingController _customerNameController = TextEditingController(text: widget.customerName);
+  TextEditingController _districtController = TextEditingController(text: widget.distc);
+  TextEditingController _addressController = TextEditingController(text: widget.cAddress);
+  TextEditingController _orderNoteController = TextEditingController(text: widget.orderNote);
   TextEditingController _contactNameController = TextEditingController();
   TextEditingController _productNameController = TextEditingController();
-  TextEditingController _buyPriceController = TextEditingController();
-  TextEditingController _mrpPriceController = TextEditingController();
-  TextEditingController _sellPriceController = TextEditingController();
+  TextEditingController _buyPriceController = TextEditingController(text: widget.buyPrice);
+  TextEditingController _mrpPriceController = TextEditingController(text: widget.mrpPrice);
+  TextEditingController _sellPriceController = TextEditingController(text: widget.sellPrice);
   TextEditingController _quantityController = TextEditingController();
   TextEditingController _sizeController = TextEditingController();
   TextEditingController _colorController = TextEditingController();
@@ -164,13 +188,11 @@ class _EditOrderState extends State<EditOrder> {
                 "Product Infromation",
                 style: kTextStyleBold,
               ),
-              CustomTextFiledforAddAndEditOrder(
-                hintText: "contact name",
-                controller: _contactNameController,
-              ),
-              SizedBox(
-                height: 10,
-              ),
+              // CustomTextFiledforAddAndEditOrder(
+              //   hintText: "contact name",
+              //   controller: _contactNameController,
+              // ),
+
               CustomTextFiledforAddAndEditOrder(
                 hintText: "Product Name",
                 controller: _productNameController,
@@ -216,6 +238,7 @@ class _EditOrderState extends State<EditOrder> {
                     };
 
                     productItems.add(productObject);
+                    customSnackBar(bgClr: Colors.blue, msg: "List Added Successfully");
                   },
                   child: Text("ADD")),
               // ========================
