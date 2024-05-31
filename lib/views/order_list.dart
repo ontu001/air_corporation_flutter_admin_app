@@ -6,8 +6,8 @@ import '../controller/Status_controller.dart';
 import '../controller/orders_controller.dart';
 import '../widget/body_list_for_order_screen.dart';
 import '../widget/custom_bottom_bar_for_order_screen.dart';
+import '../widget/custom_button.dart';
 import 'add_new_order.dart';
-
 
 class OrderList extends StatefulWidget {
   @override
@@ -17,6 +17,15 @@ class OrderList extends StatefulWidget {
 class _OrderListState extends State<OrderList> {
   OrderController orderController = Get.put(OrderController());
   StatusController statusController = Get.put(StatusController());
+
+  String selectedStatus = '';
+
+  void onStatusSelected(String status) {
+    setState(() {
+      selectedStatus = status;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -24,29 +33,46 @@ class _OrderListState extends State<OrderList> {
     orderController.fetchOrders();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(onPressed: (){
-        setState(() {
-          orderController.fetchOrders();
-          statusController.fetchStatus();
-        });
-      },child: Icon(Icons.refresh),),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            orderController.fetchOrders();
+            statusController.fetchStatus();
+          });
+        },
+        child: Icon(Icons.refresh),
+      ),
       appBar: AppBar(
-        leading: IconButton(onPressed: ()=>Navigator.pop(context),icon: Icon(Icons.arrow_back,color: kPrimaryColor,),),
-        title: const Text("Orders",style: TextStyle(color: kPrimaryColor,fontWeight: FontWeight.w900),),
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: Icon(Icons.arrow_back, color: kPrimaryColor),
+        ),
+        title: const Text(
+          "Orders",
+          style: TextStyle(color: kPrimaryColor, fontWeight: FontWeight.w900),
+        ),
         centerTitle: true,
         actions: [
-          ElevatedButton(onPressed: (){}, child: Text('All',style: kTextStyle,),style: ButtonStyle(backgroundColor: MaterialStateProperty.all(kPrimaryColor)),),
-          IconButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (_)=>AddNewOrder())),icon: const Icon(Icons.add,color: kPrimaryColor,),),
+          ElevatedButton(
+            onPressed: () {
+              onStatusSelected('');  // Clear the selected status to show all orders
+            },
+            child: Text('All', style: kTextStyle),
+            style: ButtonStyle(backgroundColor: MaterialStateProperty.all(kPrimaryColor)),
+          ),
+          IconButton(
+            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => AddNewOrder())),
+            icon: const Icon(Icons.add, color: kPrimaryColor),
+          ),
         ],
       ),
       body: Column(
         children: [
-          CustomBottomForOrderScreen(),
-          BoyListFOrOrderScreen(),
+          CustomBottomForOrderScreen(onStatusSelected: onStatusSelected),
+          BoyListForOrderScreen(selectedStatus: selectedStatus),
         ],
       ),
     );

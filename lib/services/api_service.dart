@@ -2,8 +2,13 @@ import 'dart:convert';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
+
+
 //String dbaseUrl = "https://arcorporationapi.ewant.com.bd/api";
 String dbaseUrl = "http://api.arcorporation.xyz/api";
+
+
+
 
 GetStorage userData = GetStorage();
 var token = userData.read("token");
@@ -19,7 +24,7 @@ class ApiServices {
           {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            // 'Authorization': 'Bearer $token',
+             'Authorization': 'Bearer $token',
           },
     );
 

@@ -21,7 +21,6 @@ class LogInScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   var _isObscure = true.obs;
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -53,7 +52,7 @@ class LogInScreen extends StatelessWidget {
                             Container(
                               height: size.width * 0.60,
                               child: Image.asset(
-                                'assets/images/logo.png',
+                                'assets/ar.png',
                                 // color: kPrimaryColor,
                               ),
                             ),

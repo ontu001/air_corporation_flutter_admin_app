@@ -18,7 +18,7 @@ class AuthServices extends GetConnect {
   Future login({String? userEmail, String? userPass}) async {
     try {
       isLoading(true);
-      String url = 'https://arcorporationapi.ewant.com.bd/api/admin/login';
+      String url = 'http://api.arcorporation.xyz/api/admin/login';
 
       final http.Response response = await http.post(
         Uri.parse(url),

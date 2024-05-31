@@ -14,7 +14,7 @@ class StatusController extends GetxController {
   var isLoading = false.obs;
   var token = userData.read("token");
 
- 
+
 
 
   // Future<void> feupdateStatus( int id,var body) async {
@@ -118,7 +118,7 @@ class StatusController extends GetxController {
         if (res.statusCode == 200) {
           isLoading.value = false;
 
-         // print("aita e 2222 >>>>>>> ${res.body}");
+          // print("aita e 2222 >>>>>>> ${res.body}");
 
           Map<String, dynamic> jsonData = jsonDecode(res.body);
 

@@ -1,4 +1,3 @@
-import 'package:air_corporation/controller/Status_controller.dart';
 import 'package:air_corporation/controller/orders_controller.dart';
 import 'package:air_corporation/widget/custom_appbar.dart';
 import 'package:flutter/material.dart';
@@ -6,10 +5,10 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../widget/custom_drawer.dart';
 import '../widget/my_text_style.dart';
+import 'package:air_corporation/controller/Status_controller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -104,16 +103,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           if (itemList[index]['title'] == "OrderStatus") {
                             await statusController.fetchStatus();
                           }
-                          // if (itemList[index]['title'] == "orderUpdate") {
-                          //
-                          //
-                          //   bool result = await orderController.orderUpdate(2);
-                          //   if (result == true) {
-                          //     Get.toNamed(
-                          //       '${itemList[index]["page"]}',
-                          //     );
-                          //   }
-                          // }
 
                           final List<Map<String, dynamic>> selectedExpenseData =
                               [];

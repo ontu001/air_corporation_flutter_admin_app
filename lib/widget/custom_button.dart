@@ -13,7 +13,7 @@ class CustomButton extends StatelessWidget {
     this.minWidth,
     this.padding,
     this.fontColor,
-    required this.onTap, this.redius,
+    required this.onTap, this.redius,  bool? isSelected,
   });
   final String? title;
   final double? fontSize;

@@ -41,7 +41,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ),
               alignment: Alignment.center,
               child: Image.asset(
-                'assets/images/logo.png',
+                'assets/ar.png',
                 height: size.width * 0.18,
                 fit: BoxFit.cover,
               ),

@@ -8,15 +8,20 @@ import '../common/app_color.dart';
 import '../common/constant.dart';
 import '../views/edit_order.dart';
 
-class BoyListFOrOrderScreen extends StatefulWidget {
+
+
+
+class BoyListForOrderScreen extends StatefulWidget {
+  final String selectedStatus;
+
+  BoyListForOrderScreen({required this.selectedStatus});
+
   @override
-  State<BoyListFOrOrderScreen> createState() => _BoyListFOrOrderScreenState();
+  State<BoyListForOrderScreen> createState() => _BoyListForOrderScreenState();
 }
 
-class _BoyListFOrOrderScreenState extends State<BoyListFOrOrderScreen> {
-  OrderController orderController = OrderController();
-  
-
+class _BoyListForOrderScreenState extends State<BoyListForOrderScreen> {
+  OrderController orderController = Get.put(OrderController());
 
   @override
   Widget build(BuildContext context) {
@@ -24,57 +29,57 @@ class _BoyListFOrOrderScreenState extends State<BoyListFOrOrderScreen> {
       return Expanded(
         child: Padding(
           padding: const EdgeInsets.only(bottom: 8, left: 8, right: 8, top: 10),
-          child:
-          Obx((){
+          child: Obx(() {
+            final allOrders = controller.orderList.value?.result?.data ?? [];
+            final filteredOrders = widget.selectedStatus.isEmpty
+                ? allOrders
+                : allOrders.where((order) => order.status?.name == widget.selectedStatus).toList();
 
-            return   ListView.builder(
-            itemCount: controller.orderList.value?.result?.data?.length ?? 0,
-            itemBuilder: (context, index) {
-              return Container(
-                padding: EdgeInsets.all(20.0),
-                margin: EdgeInsets.only(bottom: 10.0),
-                height: 300,
-                width: double.maxFinite,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  color: kPrimaryColor,
-                ),
-                child: Row(
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-
-                        IconButton(
+            return ListView.builder(
+              itemCount: filteredOrders.length,
+              itemBuilder: (context, index) {
+                final order = filteredOrders[index];
+                return Container(
+                  padding: EdgeInsets.all(20.0),
+                  margin: EdgeInsets.only(bottom: 10.0),
+                  height: 300,
+                  width: double.maxFinite,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    color: kPrimaryColor,
+                  ),
+                  child: Row(
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          IconButton(
                             onPressed: () {
-                                Get.to(EditOrder( id:  controller.orderList.value?.result?.data?[index].id ?? 0 ,
-                              index: index, 
-                              phoneNumber: controller.orderList.value?.result?.data?[index].phoneNumber.toString() ?? "kk ",
-                                  customerName: controller.orderList.value?.result?.data?[index].customerName.toString() ?? "no name",
-                                  distc:controller.orderList.value?.result?.data?[index].district.toString() ?? "no name" ,
-                                   cAddress: controller.orderList.value?.result?.data?[index].addressDetails.toString() ?? "no name",
-                                  orderStatus: controller.orderList.value?.result?.data?[index].paidStatus.toString() ?? "no name",
-                                  orderForm: controller.orderList.value?.result?.data?[index].orderFrom.toString() ?? "no name",
-                                  orderNote: controller.orderList.value?.result?.data?[index].orderNote.toString() ?? "no name",
-                                  contactName: controller.orderList.value?.result?.data?[index].customerName.toString() ?? "no name",
-                                  buyPrice: controller.orderList.value?.result?.data?[index].buyPrice.toString() ?? "no name",
-                                  mrpPrice: controller.orderList.value?.result?.data?[index].mrp.toString() ?? "no name",
-                                  sellPrice: controller.orderList.value?.result?.data?[index].sellPrice.toString() ?? "no name",
-
+                              Get.to(EditOrder(
+                                id: order.id ?? 0,
+                                index: index,
+                                phoneNumber: order.phoneNumber.toString() ?? "kk ",
+                                customerName: order.customerName.toString() ?? "no name",
+                                distc: order.district.toString() ?? "no name",
+                                cAddress: order.addressDetails.toString() ?? "no name",
+                                orderStatus: order.paidStatus.toString() ?? "no name",
+                                orderForm: order.orderFrom.toString() ?? "no name",
+                                orderNote: order.orderNote.toString() ?? "no name",
+                                contactName: order.customerName.toString() ?? "no name",
+                                buyPrice: order.buyPrice.toString() ?? "no name",
+                                mrpPrice: order.mrp.toString() ?? "no name",
+                                sellPrice: order.sellPrice.toString() ?? "no name",
                               ));
                             },
-                            icon: Icon(Icons.edit)),
-
-                        IconButton(
+                            icon: Icon(Icons.edit),
+                          ),
+                          IconButton(
                             onPressed: () {
-
-
                               showDialog(
                                 context: context,
                                 builder: (context) => AlertDialog(
                                   title: Text('Warning'),
-                                  content:
-                                  Text('Are you sure you want to delete?'),
+                                  content: Text('Are you sure you want to delete?'),
                                   actions: [
                                     TextButton(
                                       onPressed: () => Navigator.pop(context),
@@ -82,25 +87,14 @@ class _BoyListFOrOrderScreenState extends State<BoyListFOrOrderScreen> {
                                     ),
                                     TextButton(
                                       onPressed: () async {
-                                        // Handle confirm action
-
-                                        var result =
-                                        await controller.orderDelete(controller.orderList.value?.result?.data?[index].id ?? 0);
+                                        var result = await controller.orderDelete(order.id ?? 0);
                                         if (result == true) {
-                                          Get.snackbar("Deleted",
-                                              "Item deleted successfully");
-                                          setState(() {
-                                            controller.fetchOrders();
-                                          });
-
+                                          Get.snackbar("Deleted", "Item deleted successfully");
+                                          controller.fetchOrders();
                                         } else {
-                                          Get.snackbar(
-                                              "Please increse order list",
-                                              "Please increse order list");
+                                          Get.snackbar("Error", "Unable to delete order");
                                         }
-                                        Navigator.pop(
-                                          context,
-                                        );
+                                        Navigator.pop(context);
                                       },
                                       child: Text('Ok'),
                                     ),
@@ -111,71 +105,62 @@ class _BoyListFOrOrderScreenState extends State<BoyListFOrOrderScreen> {
                             icon: Icon(
                               Icons.delete_outline,
                               color: Colors.red,
-                            )),
-                      ],
-                    ),
-                    SizedBox(width: 10.0,),
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                        children: [
-                          // //group 1
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Order id : ${controller.orderList.value?.result?.data?[index].id.toString()}",
-                                style: kTextStyle,
-                              ),
-                              Text(
-                                "Status : ${controller.orderList.value?.result?.data?[index].status?.name.toString()}",
-                                style: kTextStyle,
-                              ),
-                              Text(
-                                "Phone : ${controller.orderList.value?.result?.data?[index].phoneNumber.toString()}",
-                                style: kTextStyle,
-                              ),
-                              Text(
-                                "Date : ${controller.orderList.value?.result?.data?[index].createdAt.toString().substring(0, controller.orderList.value?.result?.data![index].createdAt.toString().indexOf('T'))}",
-                                style: kTextStyle,
-                              ),
-                              Text(
-                                "Currier : ${controller.orderList.value?.result?.data?[index].courierName.toString() == "null" ? " " : controller.orderList.value?.result?.data![index].courierName.toString()}",
-                                style: kTextStyle,
-                              ),
-                              Text(
-                                "Paid Status : ${controller.orderList.value?.result?.data![index].paidStatus.toString()}",
-                                style: kTextStyle,
-                              ),
-                              Text(
-                                "Updated by : ${controller.orderList.value?.result?.data?[index].updatedBy?.name.toString()}",
-                                style: kTextStyle,
-                              ),
-                              Text(
-                                "Payable Amount : ${controller.orderList.value?.result?.data?[index].payablePrice.toString()}",
-                                style: kTextStyle,
-                              ),
-                            ],
+                            ),
                           ),
-
-
-
-
                         ],
                       ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          );
-       
-
+                      SizedBox(width: 10.0),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Order id : ${order.id.toString()}",
+                                  style: kTextStyle,
+                                ),
+                                Text(
+                                  "Status : ${order.status?.name.toString()}",
+                                  style: kTextStyle,
+                                ),
+                                Text(
+                                  "Phone : ${order.phoneNumber.toString()}",
+                                  style: kTextStyle,
+                                ),
+                                Text(
+                                  "Date : ${order.createdAt.toString().substring(0, order.createdAt.toString().indexOf('T'))}",
+                                  style: kTextStyle,
+                                ),
+                                Text(
+                                  "Courier : ${order.courierName.toString() == "null" ? " " : order.courierName.toString()}",
+                                  style: kTextStyle,
+                                ),
+                                Text(
+                                  "Paid Status : ${order.paidStatus.toString()}",
+                                  style: kTextStyle,
+                                ),
+                                Text(
+                                  "Updated by : ${order.updatedBy?.name.toString()}",
+                                  style: kTextStyle,
+                                ),
+                                Text(
+                                  "Payable Amount : ${order.payablePrice.toString()}",
+                                  style: kTextStyle,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            );
           }),
-          
-         
         ),
       );
     });

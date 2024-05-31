@@ -52,6 +52,19 @@ class OrderController extends GetxController {
     }
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
   Future<void> orderUpdate(int id, var orderUpdatebody) async {
     try {
       isLoading.value = true;
